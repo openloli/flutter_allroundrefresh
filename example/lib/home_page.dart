@@ -97,13 +97,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Icon> iconItems = <Icon>[
-    new Icon(Icons.keyboard), new Icon(Icons.print),
-    new Icon(Icons.router), new Icon(Icons.pages),
-    new Icon(Icons.zoom_out_map), new Icon(Icons.zoom_out),
-    new Icon(Icons.youtube_searched_for), new Icon(Icons.wifi_tethering),
+    new Icon(Icons.ac_unit),    new Icon(Icons.weekend),
+    new Icon(Icons.web), new Icon(Icons.keyboard),
+    new Icon(Icons.print), new Icon(Icons.router),
+    new Icon(Icons.pages), new Icon(Icons.person),
+    new Icon(Icons.zoom_out_map), new Icon(Icons.wifi_tethering),
     new Icon(Icons.wifi_lock), new Icon(Icons.widgets),
-    new Icon(Icons.weekend), new Icon(Icons.web),
-    new Icon(Icons.accessible), new Icon(Icons.ac_unit),
+
+
   ];
   List<String> _styleList = [
     '1初始化',
@@ -114,11 +115,5 @@ class _HomePageState extends State<HomePage> {
     '6自定义始化转圈2',
     '7自定义错误页面1（可重试）',
     '8自定义错误页面2（不可重试） ',
-    '9自定义下拉刷新布局1()',
-    '10自定义下拉刷新布局2',
-    '11自定义上拉加载布局1',
-    '12自定义上拉加载布局2',
-    '自定义始化转圈',
-    '自定义始化转圈',
   ];
 }

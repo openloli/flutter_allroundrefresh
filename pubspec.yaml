@@ -1,8 +1,8 @@
 name: flutter_allroundrefresh
 description: A all-round refresh Flutter plugin.
-version: 0.0.1
+version: 0.0.3
 author: pf <133300871@qq.com>
-homepage: https://github.com/android-pf
+homepage: https://github.com/android-pf/flutter_allroundrefresh
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

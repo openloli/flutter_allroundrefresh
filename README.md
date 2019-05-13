@@ -1,7 +1,12 @@
 # flutter_allroundrefresh
 
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
+<img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a>
+
 ## Intro
-a widget provided to the flutter scroll component drop-down refresh and pull up load.support android and ios.
+
+A component that provides initial load + drop-down refresh + pull-up load + error page on the basis of <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a> framework, while supporting Android and Ios
 If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
 
 ## Features

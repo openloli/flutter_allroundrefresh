@@ -1,5 +1,9 @@
 # flutter_allroundrefresh
 
+![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
+<img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a>
+
 ## 介绍
 
 一个在 <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a> 框架基础上提供初始加载+下拉刷新+上拉加载+错误页面的组件,同时支持Android和Ios
