@@ -1,17 +1,16 @@
 # flutter_allroundrefresh
 
 ## 介绍
-一个提供初始加载+下拉刷新+上拉加载+错误页面的组件,同时支持Android和Ios
+一个在 <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a> 框架基础上提供初始加载+下拉刷新+上拉加载+错误页面的组件,同时支持Android和Ios
 
 ## 特性
-* 同时支持Android,IOS
+* <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a>框架所有特性
+
 * 提供上拉加载和下拉刷新
+
 * 提供初始加载和错误页面
-* 几乎适合所有滚动部件,例如GridView,ListView...
-* 高度扩展性和很低的限制性
-* 灵活的回弹能力
-* 支持反转列表
-* 提供多种刷新指示器风格:跟随,不跟随,背部
+
+  
 
 ## 指示器截图
 
