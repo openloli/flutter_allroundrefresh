@@ -19,96 +19,6 @@ If you are Chinese,click here([中文文档](<https://github.com/android-pf/flut
 * provide more refreshStyle: Behind,Follow,UnFollow
 
 
-## 指示器截图
-
-|Classic Follow| Classic UnFollow |
-|:---:|:---:|
-|![](example/images/classical_follow.gif)|![](example/images/classical_unfollow.gif)|
-
-| Behind | WaterDrop(QQ)|
-|:---:|:---:|
-|![](arts/screen1.gif)|![](example/images/warterdrop.gif)|
-
-
-
-
-## How to use?
-
-```
-
-   dependencies:
-     pull_to_refresh: ^1.3.2
-
-```
-
-
-
-```
-
-RefreshController _refreshController;
-
-initState(){
-
-    super.initState();
-    _refreshController = RefreshController();
-}
-
-void _onRefresh(){
-
-   /*.  after the data return,
-        use _refreshController.refreshComplete() or refreshFailed() to end refreshing
-   */
-}
-
-void _onLoading(){
-   /*
-        use _refreshController.loadComplete() or loadNoData() to end loading
-   */
-}
-
-build(){
-...
-SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
-      header: WaterDropHeader(),
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      onLoading: _onLoading,
-      child: "yourContentScrollView",
-    )
-....
-}
-
-// don't forget to dispose refreshController
-void dispose(){
-    _refreshController.dispose();
-    super.dispose();
-}
-
-```
-
-
-
-
-## Custom
-1.In the first way, assuming that the indicator function you want to implement is not too complex, you can use CustomHeader or CustomFooter
-
-```
-   Widget buildHeader(BuildContext context,RefreshStatus mode){
-      .....
-   }
-
-   SmartRefresher(
-      ...
-      header: CustomHeader(builder:buildHeader)
-
-      ...
-   )
-
-```
-
-2.The second way is by integrating RefreshInditor or Load Indicator, for detailed reference [ClassicIndicator](lib/src/indicator/classic_indicator.dart)
 
 ## Props Table
 
@@ -129,24 +39,6 @@ SmartRefresher:
 | isNestWrapped | it will set true when SmartRefresher is wrapped by NestedScrollView  | bool | false | optional |
 
 
-## Frequent problems
-* <h3>IOS Status Bar Double-click Why ListView does not automatically scroll to the top?</h3>
-This problem is not my encapsulation error after testing. When the controller in ListView is replaced, this problem will occur, probably
-because of the processing operation in Scaffold.,please issue flutter。
-
-* <h3>How to use it with NestedScrollView?</h3>
-1.3.0 provides a new attribute isNestWrapped for compatibility. Note that when this attribute is opened, scollController depends on NestScrollView,
-internally via PrimaryScrollController. of (context) To get scrollController, scrollController is placed in NestedScrollView。
-
-* <h3>Why is there a empty space in the top or tail indicator after using CuperNavigationBar (not just in this case)?</h3>
-the reason may be SafeArea,the solution: wrap SmartRefresher in SafeArea
-
-
-* <h3>Does it support simple RefreshIndicator (material) + pull up loading and no elastic refresh combination?<br></h3>
-Yes, as long as you set the node properties enableOverScroll = false, enablePullDown = false, it's OK to wrap a single RefreshIndicator outside, and
-[Example4](https://github.com/peng8350/flutter_pulltorefresh/blob/master/example/lib/ui/Example3.dart) has given an example in demo.
-
-
 
 
 
@@ -156,7 +48,7 @@ Yes, as long as you set the node properties enableOverScroll = false, enablePull
  
 MIT License
 
-Copyright (c) 2018 Jpeng
+Copyright (c) 2018 pf
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
