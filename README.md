@@ -1,22 +1,14 @@
 # flutter_allroundrefresh
 
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
-
-<img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a>
-
 ## Intro
 
 A component that provides initial load + drop-down refresh + pull-up load + error page on the basis of  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> )framework, while supporting Android and Ios
 If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
 
 ## Features
-* Android and iOS both supported
+* pull_to_refresh framework all features
 * pull up and pull down
-* It's almost fit for all Scroll witgets,like GridView,ListView...
-* High extensibility,High degree of freedom
-* powerful Bouncing
-* support reverse ScrollView
-* provide more refreshStyle: Behind,Follow,UnFollow
+* provide initial load and error pages
 
 
 
