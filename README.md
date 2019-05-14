@@ -1,64 +1,136 @@
 # flutter_allroundrefresh
 
-## Intro
+### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
 
-A component that provides initial load + drop-down refresh + pull-up load + error page on the basis of  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> )framework, while supporting Android and Ios
-If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
+## Download APK experience
 
 ## Features
 * pull_to_refresh framework all features
 * pull up and pull down
-* provide initial load and error pages
+* Provide initial load and error pages (data, network errors)
+* Provide network encapsulation and data processing middleware
+
+## Use 
+
+```flutter
+dependencies:
+  flutter_allroundrefresh: ^0.0.3
+```
+
+```flutter
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+...
+RefreshController _refreshController;
+var resultStatus = ResultStatus.init;
+		...
+	    body: AllRoundRefresher(
+        resultStatus: resultStatus,
+        enablePullDown: true,
+        enablePullUp: true,
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: "your child"
+        errCallback: () {
+			...
+        },
+      ),
+      ...
+ @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+	...
+    _refreshController = new RefreshController(); 
+    //init get data
+    super.initState();
+  }
+
+  void _onRefresh() {
+   //Refresh data
+  }
+
+
+  void _onLoading() {
+  	//load more
+  }
+
+
+  _surprise(up) async {
+	...
+    ARefreshWidgetHelper.refresh(
+        refreshController: _refreshController,
+        response: "current page acquisition method",
+        callbackNormal: (json) {
+       	...
+       	//refresh condition processing, load more processing
+        },
+        callbackError: (msg) {
+          ...
+       	//refresh data exception handling, load more exception handling
+        }
+    );
+  }
+```
+
+After copying the above code from the common list page, you only need to write the item.
 
 
 
 ## Props Table
 
-SmartRefresher:
+AllRoundRefresher:
 
-| Attribute Name     |     Attribute Explain     | Parameter Type | Default Value  | requirement |
-|---------|--------------------------|:-----:|:-----:|:-----:|
-| controller | controll inner some states  | RefreshController | null | necessary |
-| child      | your content View   | ? extends ScrollView   |   null |  necessary |
-| header | the header indictor     | RefreshIndicator | ClassicHeader | optional |
-| footer | the footer indictor     | LoadIndicator  | ClassicFooter | optional |
-| enablePullDown | switch of the pull down      | boolean | true | optional |
-| enablePullUp |   switch of the pull up  | boolean | false |optional |
-| onRefresh | will callback when the header indicator is getting refreshing   | () => Void | null | optional |
-| onLoad | will callback when the footer indicator is getting loading   | () => Void | null | optional |
-| onOffsetChange | callback while you dragging and outOfrange  | (bool,double) => Void | null | optional |
-| enableOverScroll |  the switch of Overscroll,When you use  RefreshIndicator(Material), you may have to shut down.    | bool | true | optional |
-| isNestWrapped | it will set true when SmartRefresher is wrapped by NestedScrollView  | bool | false | optional |
+| Attribute Name | Attribute Explain            | Default Value | Requirement |
+| -------------- | ---------------------------- | ------------- | :---------: |
+| resultStatus   | result stater                | null          |  necessary  |
+| controller     | state controller             | null          |  necessary  |
+| child          | your widget                  | null          |  necessary  |
+| onRefresh      | refresh data                 | null          |  necessary  |
+| onLoading      | load more                    | null          |  necessary  |
+| header         | refresh header               | ClassicHeader |  optional   |
+| footer         | footer loading               | ClassicFooter |  optional   |
+| enablePullDown | pull-down switch             | true          |  optional   |
+| enablePullUp   | load more switch             | false         | 可optional  |
+| progress       | custom initial progress view | ProgressView  |  optional   |
+| error          | custom error page            | Container     |  optional   |
+| enableQuickTop | quick return to top switch   | true          |  optional   |
+
+ARefreshWidgetHelper:
+
+| Attribute Name    | Attribute Explain                                | Requirement |
+| ----------------- | ------------------------------------------------ | :---------: |
+| refreshController | state controller                                 |  necessary  |
+| response          | the result set of the method of getting the data |  necessary  |
+| callbackNormal    | normal data callback                             |  necessary  |
+| callbackError     | abnormal data callback                           |  necessary  |
 
 
 
+# Other
 
+### QQ Group：10788108。
 
 ## LICENSE
 
 ```
  
-MIT License
+Copyright 2019 pf
 
-Copyright (c) 2018 pf
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    http://www.apache.org/licenses/LICENSE-2.0
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
  
 ```
