@@ -6,7 +6,7 @@
 
 ## Intro
 
-A component that provides initial load + drop-down refresh + pull-up load + error page on the basis of <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a> framework, while supporting Android and Ios
+A component that provides initial load + drop-down refresh + pull-up load + error page on the basis of  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> )framework, while supporting Android and Ios
 If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
 
 ## Features

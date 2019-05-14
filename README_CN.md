@@ -6,11 +6,11 @@
 
 ## 介绍
 
-一个在 <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a> 框架基础上提供初始加载+下拉刷新+上拉加载+错误页面的组件,同时支持Android和Ios
+一个在 [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> ) 框架基础上提供初始加载+下拉刷新+上拉加载+错误页面的组件,同时支持Android和Ios
 
 ## 特性
 
-- <a href=<https://pub.flutter-io.cn/packages/pull_to_refresh> pull_to_refresh</a>框架所有特性
+- pull_to_refresh 框架所有特性
 
 - 提供上拉加载和下拉刷新
 
