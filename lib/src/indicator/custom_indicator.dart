@@ -1,17 +1,10 @@
-/*
- * Author: Jpeng
- * Email: peng8350@gmail.com
- * Time: 2019/5/4 下午9:49
- */
-
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
 import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
-
-import '../internals/indicator_wrap.dart';
-//import '../smart_refresher.dart';
-import '../all_round_refresher.dart';
 import '../internals/default_constants.dart';
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import '../internals/indicator_wrap.dart';
+import '../all_round_refresher.dart';
+
 class CustomHeader extends RefreshIndicator {
   final HeaderBuilder builder;
 
@@ -22,10 +15,10 @@ class CustomHeader extends RefreshIndicator {
     RefreshStyle refreshStyle: RefreshStyle.Follow,
     double triggerDistance: default_refresh_triggerDistance,
   }) : super(
-            key: key,
-            triggerDistance: triggerDistance,
-            refreshStyle: refreshStyle,
-            height: height);
+      key: key,
+      triggerDistance: triggerDistance,
+      refreshStyle: refreshStyle,
+      height: height);
 
   @override
   State<StatefulWidget> createState() {
@@ -52,10 +45,10 @@ class CustomFooter extends LoadIndicator {
     Function onClick,
     double triggerDistance: default_load_triggerDistance,
   }) : super(
-            key: key,
-            autoLoad: autoLoad,
-            triggerDistance: triggerDistance,
-            onClick: onClick);
+      key: key,
+      autoLoad: autoLoad,
+      triggerDistance: triggerDistance,
+      onClick: onClick);
 
   @override
   State<StatefulWidget> createState() {

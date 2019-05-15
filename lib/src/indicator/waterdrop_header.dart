@@ -1,18 +1,11 @@
-/*
- * Author: Jpeng
- * Email: peng8350@gmail.com
- * Time: 2019/5/5 下午2:37
- */
-
-import 'dart:async';
-
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
 import 'package:flutter/material.dart'
     hide RefreshIndicatorState, RefreshIndicator;
 import '../internals/indicator_wrap.dart';
 import 'package:flutter/cupertino.dart';
-//import '../smart_refresher.dart';
 import '../all_round_refresher.dart';
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import 'dart:async';
+
 class WaterDropHeader extends RefreshIndicator {
   final Widget refresh;
 

@@ -1,16 +1,10 @@
-/*
- * Author: Jpeng
- * Email: peng8350@gmail.com
- * Time: 2019/5/2 下午5:09
- */
-
-import 'package:flutter/material.dart';
-import 'dart:math' as Math;
-import 'package:flutter/rendering.dart';
-//import '../smart_refresher.dart';
-import '../all_round_refresher.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/cupertino.dart';
+import '../all_round_refresher.dart';
+import 'dart:math' as Math;
+
 class SliverRefresh extends SingleChildRenderObjectWidget {
   const SliverRefresh({
     Key key,

@@ -1,16 +1,12 @@
-/*
-    Author: Jpeng
-    Email: peng8350@gmail.com
-    createTime:2018-05-14 15:39
- */
-
-import 'dart:async';
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'default_constants.dart';
 import 'dart:math' as math;
+import 'dart:async';
 import 'slivers.dart';
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+
+
 abstract class Indicator extends StatefulWidget {
   final double triggerDistance;
 
@@ -208,8 +204,8 @@ abstract class LoadIndicatorState<T extends LoadIndicator> extends State<T> {
 
   set mode(mode) => _footerMode.value = mode;
 
-  bool get _isRefreshing =>
-      refresher.widget.controller.footerMode.value == LoadStatus.loading;
+//  bool get _isRefreshing =>
+//      refresher.widget.controller.footerMode.value == LoadStatus.loading;
 
   ScrollController _scrollController;
 

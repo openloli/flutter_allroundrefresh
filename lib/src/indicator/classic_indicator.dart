@@ -1,16 +1,9 @@
-/**
-    Author: Jpeng
-    Email: peng8350@gmail.com
-    createTime:2018-05-14 17:39
- */
-
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
 import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
-import 'package:flutter/widgets.dart';
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
 import '../internals/default_constants.dart';
 import '../internals/indicator_wrap.dart';
-//import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter/widgets.dart';
 
 enum IconPosition { left, right, top, bottom }
 
@@ -147,7 +140,7 @@ class ClassicFooter extends LoadIndicator {
   const ClassicFooter({
     Key key,
     Function onClick,
-    bool autoLoad: default_AutoLoad,
+    bool autoLoad: default_true,
     double triggerDistance: default_load_triggerDistance,
     this.textStyle: const TextStyle(color: const Color(0xff555555)),
     this.loadingText: 'Loading...',

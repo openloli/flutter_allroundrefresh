@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/*
+This is default  init loading widget.
+The background color of the Widget follows the system.
+*/
 class ProgressView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

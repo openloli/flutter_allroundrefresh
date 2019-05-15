@@ -1,21 +1,14 @@
-/*
-    Author: Jpeng
-    Email: peng8350@gmail.com
-    createTime:2018-05-01 11:39
- */
-
-import 'package:flutter/material.dart'
-    hide RefreshIndicator, RefreshIndicatorState;
 import 'package:flutter_allroundrefresh/src/internals/indicator_wrap.dart';
 import 'package:flutter_allroundrefresh/src/proview/proqress_view.dart';
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import 'package:flutter/material.dart'
+    hide RefreshIndicator, RefreshIndicatorState;
 import 'internals/default_constants.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'indicator/classic_indicator.dart';
-import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import 'package:flutter/widgets.dart';
 
 enum RefreshStatus { idle, canRefresh, refreshing, completed, failed }
 
@@ -25,44 +18,53 @@ enum RefreshStyle { Follow, UnFollow, Behind }
 enum ResultStatus { init, nomel, error, noMore, retry }
 
 /*
-    This is the most important component that provides drop-down refresh and up loading.
+    This is the most important component that provides full functionality.
  */
 class AllRoundRefresher extends StatefulWidget {
   //indicate your listView
   final ScrollView child;
 
+  //Refresh header
   final RefreshIndicator header;
+
+  //Footer loading
   final LoadIndicator footer;
 
-  // This bool will affect whether or not to have the function of drop-up load.
+  //This bool will affect whether or not to have the function of drop-up load.
   final bool enablePullUp;
 
   //This bool will affect whether or not to have the function of drop-down refresh.
   final bool enablePullDown;
 
-  //This bool will 快速返回顶部，，后期在写注释
-  final bool enableQuickTop; //
-  // This bool will 转圈，，后期在写注释
-  final Widget progress; //
-  final Widget error; //
+  //This bool will affect whether or not to have the function of quickly return to the top.
+  final bool enableQuickTop;
 
+  //This is a custom init loading widget
+  final Widget progress;
 
-  // if open OverScroll if you use RefreshIndicator and LoadFooter
+  //This is a custom error widget
+  final Widget error;
+
+  //if open OverScroll if you use RefreshIndicator and LoadFooter
   final bool enableOverScroll;
 
-  // upper and downer callback when you drag out of the distance
+  //upper and downer callback when you drag out of the distance
   final Function onRefresh, onLoading;
 
-  // This method will callback when the indicator changes from edge to edge.
+  //This method will callback when the indicator changes from edge to edge.
   final OnOffsetChange onOffsetChange;
 
   //controll inner state
   final RefreshController controller;
 
-  // When SmartRefresher is wrapped in some ScrollView,if true:it will find the primaryScrollController in parent widget
+  //When SmartRefresher is wrapped in some ScrollView,if true:it will find the primaryScrollController in parent widget
   final bool isNestWrapped;
+
+  //Component state manager
   var resultStatus;
-  Function errCallback;
+
+  //Error callback
+  final Function errCallback;
 
   AllRoundRefresher({Key key,
     @required this.child,
@@ -97,11 +99,13 @@ class AllRoundRefresher extends StatefulWidget {
 }
 
 class AllRoundRefresherState extends State<AllRoundRefresher> {
-  // listen the listen offset or on...
+  //Listen the listen offset or on...
   ScrollController scrollController;
 
-  // check the header own height
+  //Check the header own height
   ValueNotifier<bool> hasHeaderLayout = ValueNotifier(false);
+
+  //Quick return internal keywords
   bool isShowFloat = false;
 
   @override
@@ -159,22 +163,18 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
     if (widget.enablePullDown != oldWidget.enablePullDown) {
       widget.controller.headerMode.value = RefreshStatus.idle;
       hasHeaderLayout.value = false;
-      print('11111');
     }
     if (widget.enablePullUp != oldWidget.enablePullUp) {
       widget.controller.footerMode.value = LoadStatus.idle;
-      print('2222');
     }
     if (!widget.isNestWrapped && widget.child.controller != null) {
       scrollController = widget.child.controller;
-      print('333');
       isShowProView = true;
       setState(() {});
     }
 
     if (widget.isNestWrapped) {
       scrollController = PrimaryScrollController.of(context);
-      print('444');
     }
     widget.controller.scrollController = scrollController;
     widget.controller._header = widget.header;
@@ -190,22 +190,10 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
 
     if (widget.enablePullDown) {
       slivers.insert(0, widget.header);
-      print('55555');
     }
     if (widget.enablePullUp) {
       slivers.add(widget.footer);
-      print('66666');
     }
-
-
-//    if(widget.size!=0){
-//      isShowProView=true;
-//          print('7777 if ${widget.size}');
-//      setState(() {});
-//    }else{
-//      print('7777 else ${widget.resultStatus}');
-//    }
-    print('7777 resultStatus ${widget.resultStatus}');
 
     return new Scaffold(
       body: Stack(
@@ -246,7 +234,6 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
               color: Colors.white70,
               child: GestureDetector(
                 onTap: () {
-                  print('onTap  0000');
                   widget.errCallback();
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     widget.controller.requestRefresh();

@@ -1,12 +1,7 @@
-import 'package:flutter/widgets.dart';
-//import 'package:pull_to_refresh/src/smart_refresher.dart';
-import '../all_round_refresher.dart';
 import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
-/*
-    Author: Jpeng
-    Email: peng8350@gmail.com
-    createTime:2018-05-17 10:39
- */
+import 'package:flutter/widgets.dart';
+import '../all_round_refresher.dart';
+
 
 typedef void OnOffsetChange(bool up, double offset);
 typedef Widget HeaderBuilder(BuildContext context, RefreshStatus mode);
@@ -23,16 +18,6 @@ const double default_height = 60.0;
 const double default_headerExceed = 100.0;
 
 const double default_footerExceed = 100.0;
-
-const bool default_AutoLoad = true;
-
-const bool default_enablePullDown = true;
-
-const bool default_enablePullUp = false;
-
-const bool default_BottomWhenBuild = true;
-
-const bool default_enableOverScroll = true;
 
 const int spaceAnimateMill = 300;
 
