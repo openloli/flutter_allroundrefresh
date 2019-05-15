@@ -4,13 +4,83 @@ Demonstrates how to use the flutter_allroundrefresh plugin.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1:
 
-A few resources to get you started if this is your first Flutter project:
+```flutter
+...
+AllRoundRefresher(
+        resultStatus: resultStatus,
+        enablePullDown: true,
+        enablePullUp: true,
+        controller: _controller,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: "your child widget",
+        errCallback: () {
+		...
+        },
+      ),
+...
+```
+t2:
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+```
+import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+...
+RefreshController _refreshController;
+var resultStatus = ResultStatus.init;
+		...
+	    body: AllRoundRefresher(
+        resultStatus: resultStatus,
+        enablePullDown: true,
+        enablePullUp: true,
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: "your child"
+        errCallback: () {
+			...
+        },
+      ),
+      ...
+ @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+  @override
+  void initState() {
+	...
+    _refreshController = new RefreshController(); 
+    //init get data
+    super.initState();
+  }
+
+  void _onRefresh() {
+   //Refresh data
+  }
+
+
+  void _onLoading() {
+  	//load more
+  }
+
+
+  _surprise(up) async {
+	...
+    ARefreshWidgetHelper.refresh(
+        refreshController: _refreshController,
+        response: "current page acquisition method",
+        callbackNormal: (json) {
+       	...
+       	//refresh condition processing, load more processing
+        },
+        callbackError: (msg) {
+          ...
+       	//refresh data exception handling, load more exception handling
+        }
+    );
+  }
+```
+

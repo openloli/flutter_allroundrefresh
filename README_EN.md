@@ -1,21 +1,19 @@
+Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README.md> )| [English](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> )
+
 # flutter_allroundrefresh
 
-### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README.md> ))
+### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.
 
 ## Download APK experience
 
-## Features
-* pull_to_refresh framework all features
-* pull up and pull down
-* Provide initial load and error pages (data, network errors)
-* Provide network encapsulation and data processing middleware
-
-## Use 
+### Add dependency
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^0.0.3
+  flutter_allroundrefresh: ^1.0.0
 ```
+
+## Use
 
 ```flutter
 import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';

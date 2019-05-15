@@ -1,27 +1,19 @@
+文档语言：[中文简体](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README.md> )| [English](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> )
+
 # flutter_allroundrefresh
 
-### 基于  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> ) 在原有下拉刷新、上拉加载更多的基础上实现了初始转圈、数据异常、网络异常、重试以及网络封装、数据中间件的从进入页面到退出页面的全功能组件。([English document](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> ))
+### 基于  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> ) 在原有下拉刷新、上拉加载更多的基础上实现了初始转圈、数据异常、网络异常、重试以及网络封装、数据中间件的从进入页面到退出页面的全功能组件。
 
 ## 下载APK体验
 
-## 特性
-
-- pull_to_refresh 框架所有特性
-
-- 提供上拉加载和下拉刷新
-
-- 提供初始加载和错误页面（数据、网络 错误）
-
-- 提供网络封装、数据处理中间件
-
-  
-
-## 使用
+## 添加依赖
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^0.0.3
+  flutter_allroundrefresh: ^1.0.0
 ```
+
+## 使用
 
 ```flutter
 import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
@@ -87,6 +79,8 @@ var resultStatus = ResultStatus.init;
 ```
 
 常见list页面复制以上代码后，只需要编写 item 即可
+
+
 
 ## 属性说明
 

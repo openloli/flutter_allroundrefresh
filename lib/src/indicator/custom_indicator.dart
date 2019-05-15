@@ -15,10 +15,10 @@ class CustomHeader extends RefreshIndicator {
     RefreshStyle refreshStyle: RefreshStyle.Follow,
     double triggerDistance: default_refresh_triggerDistance,
   }) : super(
-      key: key,
-      triggerDistance: triggerDistance,
-      refreshStyle: refreshStyle,
-      height: height);
+            key: key,
+            triggerDistance: triggerDistance,
+            refreshStyle: refreshStyle,
+            height: height);
 
   @override
   State<StatefulWidget> createState() {
@@ -45,10 +45,10 @@ class CustomFooter extends LoadIndicator {
     Function onClick,
     double triggerDistance: default_load_triggerDistance,
   }) : super(
-      key: key,
-      autoLoad: autoLoad,
-      triggerDistance: triggerDistance,
-      onClick: onClick);
+            key: key,
+            autoLoad: autoLoad,
+            triggerDistance: triggerDistance,
+            onClick: onClick);
 
   @override
   State<StatefulWidget> createState() {
