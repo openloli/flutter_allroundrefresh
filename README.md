@@ -1,16 +1,22 @@
 # flutter_allroundrefresh
 
-### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.If you are Chinese,click here([中文文档](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_CN.md> ))
+### 基于  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> ) 在原有下拉刷新、上拉加载更多的基础上实现了初始转圈、数据异常、网络异常、重试以及网络封装、数据中间件的从进入页面到退出页面的全功能组件。([English document](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> ))
 
-## Download APK experience
+## 下载APK体验
 
-## Features
-* pull_to_refresh framework all features
-* pull up and pull down
-* Provide initial load and error pages (data, network errors)
-* Provide network encapsulation and data processing middleware
+## 特性
 
-## Use 
+- pull_to_refresh 框架所有特性
+
+- 提供上拉加载和下拉刷新
+
+- 提供初始加载和错误页面（数据、网络 错误）
+
+- 提供网络封装、数据处理中间件
+
+  
+
+## 使用
 
 ```flutter
 dependencies:
@@ -27,17 +33,19 @@ var resultStatus = ResultStatus.init;
         resultStatus: resultStatus,
         enablePullDown: true,
         enablePullUp: true,
+        header: WaterDropHeader(),
         controller: _refreshController,
         onRefresh: _onRefresh,
         onLoading: _onLoading,
         child: "your child"
         errCallback: () {
-			...
+         ...
         },
       ),
       ...
  @override
   void dispose() {
+    _animController.dispose();
     _refreshController.dispose();
     super.dispose();
   }
@@ -46,17 +54,18 @@ var resultStatus = ResultStatus.init;
   void initState() {
 	...
     _refreshController = new RefreshController(); 
-    //init get data
+    //第一次(初始)获取网络数据
+    
     super.initState();
   }
 
   void _onRefresh() {
-   //Refresh data
+   //刷新数据
   }
 
 
   void _onLoading() {
-  	//load more
+  	//加载更多
   }
 
 
@@ -64,58 +73,56 @@ var resultStatus = ResultStatus.init;
 	...
     ARefreshWidgetHelper.refresh(
         refreshController: _refreshController,
-        response: "current page acquisition method",
+        response: "当前页面获取数据的方法",
         callbackNormal: (json) {
        	...
-       	//refresh condition processing, load more processing
+       	//刷新情况处理、加载更多处理
         },
         callbackError: (msg) {
           ...
-       	//refresh data exception handling, load more exception handling
+       	//刷新数据异常处理、加载更多异常处理
         }
     );
   }
 ```
 
-After copying the above code from the common list page, you only need to write the item.
+常见list页面复制以上代码后，只需要编写 item 即可
 
-
-
-## Props Table
+## 属性说明
 
 AllRoundRefresher:
 
-| Attribute Name | Attribute Explain            | Default Value | Requirement |
-| -------------- | ---------------------------- | ------------- | :---------: |
-| resultStatus   | result stater                | null          |  necessary  |
-| controller     | state controller             | null          |  necessary  |
-| child          | your widget                  | null          |  necessary  |
-| onRefresh      | refresh data                 | null          |  necessary  |
-| onLoading      | load more                    | null          |  necessary  |
-| header         | refresh header               | ClassicHeader |  optional   |
-| footer         | footer loading               | ClassicFooter |  optional   |
-| enablePullDown | pull-down switch             | true          |  optional   |
-| enablePullUp   | load more switch             | false         | 可optional  |
-| progress       | custom initial progress view | ProgressView  |  optional   |
-| error          | custom error page            | Container     |  optional   |
-| enableQuickTop | quick return to top switch   | true          |  optional   |
+| 属性名         | 说明             | 默认          | 必要性 |
+| -------------- | ---------------- | ------------- | :----: |
+| resultStatus   | 结果状态器       | null          |  必要  |
+| controller     | 状态控制器       | null          |  必要  |
+| child          | 内部组件         | null          |  必要  |
+| onRefresh      | 刷新数据         | null          |  必要  |
+| onLoading      | 加载更多         | null          |  必要  |
+| header         | 刷新头           | ClassicHeader |  可选  |
+| footer         | 底部加载         | ClassicFooter |  可选  |
+| enablePullDown | 下拉开关         | true          |  可选  |
+| enablePullUp   | 加载更多开关     | false         |  可选  |
+| progress       | 自定义初始加载   | ProgressView  |  可选  |
+| error          | 自定义错误页面   | Container     |  可选  |
+| enableQuickTop | 快速返回顶部开关 | true          |  可选  |
 
 ARefreshWidgetHelper:
 
-| Attribute Name    | Attribute Explain                                | Requirement |
-| ----------------- | ------------------------------------------------ | :---------: |
-| refreshController | state controller                                 |  necessary  |
-| response          | the result set of the method of getting the data |  necessary  |
-| callbackNormal    | normal data callback                             |  necessary  |
-| callbackError     | abnormal data callback                           |  necessary  |
+| 属性名            | 说明                   | 必要性 |
+| ----------------- | ---------------------- | :----: |
+| refreshController | 状态控制器             |  必要  |
+| response          | 获取数据的方法的结果集 |  必要  |
+| callbackNormal    | 正常数据回调           |  必要  |
+| callbackError     | 非正常数据回调         |  必要  |
 
 
 
-# Other
+# 其他
 
-### QQ Group：10788108。
+### QQ群：10788108。
 
-## LICENSE
+## 开源协议
 
 ```
  
@@ -134,3 +141,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
  
 ```
+
+
+
+### 鸣谢
+
+pull_to_refresh
