@@ -61,6 +61,8 @@
       <excludeFolder url="file://$MODULE_DIR$/example/lib/my/my_header/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/my/my_pro/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/my/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/example/lib/net/bean/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/example/lib/net/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/pages/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/util/packages" />

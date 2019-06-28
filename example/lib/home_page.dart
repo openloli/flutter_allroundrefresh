@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_allroundrefresh_example/net/net.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample2.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample3.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample4.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_allroundrefresh_example/pages/sample5.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample6.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample7.dart';
 import 'package:flutter_allroundrefresh_example/pages/sample8.dart';
+import 'package:flutter_allroundrefresh_example/pages/sample9.dart';
 import 'package:flutter_allroundrefresh_example/pages/sapmle1.dart';
 import 'package:flutter_allroundrefresh_example/util/rout_helper.dart';
 
@@ -22,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    HttpManager().initDio(yourIntercept: null, yourPEM: '9527');
     super.initState();
   }
 
@@ -87,6 +90,7 @@ class _HomePageState extends State<HomePage> {
     } else if (strItem == _styleList[7]) {
       page = Sample8();
     } else if (strItem == _styleList[8]) {
+      page = Sample9();
     } else if (strItem == _styleList[9]) {
     } else if (strItem == _styleList[10]) {
     }
@@ -115,5 +119,6 @@ class _HomePageState extends State<HomePage> {
     '6自定义始化转圈2',
     '7自定义错误页面1（可重试）',
     '8自定义错误页面2（不可重试） ',
+    '9正式接口正式页面',
   ];
 }

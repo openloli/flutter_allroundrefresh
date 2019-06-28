@@ -13,7 +13,7 @@ class ProgressView extends StatelessWidget {
         height: 30.0,
         child: new CircularProgressIndicator(
           strokeWidth: 2.0,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.red,
         ),
       ),
     );

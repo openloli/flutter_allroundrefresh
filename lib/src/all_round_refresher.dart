@@ -108,6 +108,12 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
   //Quick return internal keywords
   bool isShowFloat = false;
 
+  void temp() {
+    Future.delayed(const Duration(milliseconds: 1000)).then((val) {
+//      _surprise(false);
+    });
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -116,6 +122,8 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
     }
     hasHeaderLayout.dispose();
     hasHeaderLayout = null;
+
+
     super.dispose();
   }
 
@@ -147,8 +155,6 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    // there is no method to get PrimaryScrollController in initState
     if (widget.isNestWrapped) {
       scrollController = PrimaryScrollController.of(context);
       widget.controller.scrollController = scrollController;
@@ -200,7 +206,8 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
         children: <Widget>[
           CustomScrollView(
             physics: RefreshScrollPhysics(
-                enableOverScroll: widget.enableOverScroll),
+                enableOverScroll: widget.enableOverScroll
+            ),
             controller: scrollController,
             cacheExtent: widget.child.cacheExtent,
             key: widget.child.key,
@@ -210,6 +217,7 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
             slivers: slivers,
             reverse: widget.child.reverse,
           ),
+          //初始转圈
           new Offstage(
             offstage: widget.resultStatus == ResultStatus.init ? false : true,
             child: new Container(
@@ -218,15 +226,16 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
               child: ProgressView(),
             ),
           ),
+          //初始转圈扩展，上面的是不是可以去掉了？
           new Offstage(
             offstage: widget.resultStatus == ResultStatus.init ? false : true,
             child: new Container(
               alignment: Alignment.center,
               color: Colors.white70,
-              child: widget.progress == null ? ProgressView() : widget
-                  .progress,
+              child: widget.progress == null ? ProgressView() : widget.progress,
             ),
           ),
+          //错误页面
           new Offstage(
             offstage: widget.resultStatus == ResultStatus.error ? false : true,
             child: new Container(
@@ -234,23 +243,22 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
               color: Colors.white70,
               child: GestureDetector(
                 onTap: () {
-                  widget.errCallback();
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     widget.controller.requestRefresh();
                   });
+                  widget.errCallback();
                 },
-                child: widget.error == null ?
-                Text('暂无数据') :
-                widget.error,
+                child: widget.error == null ? Text('暂无数据') : widget.error,
               ),
             ),
           )
         ],
       ),
+      //快速返回按钮，当数据过长时出现
       floatingActionButton: buildFloatingActionButton(),
     );
   }
-
+  //快速返回按钮，当数据过长时出现
   Widget buildFloatingActionButton() {
     return isShowFloat ? FloatingActionButton(
         backgroundColor: Theme
@@ -263,7 +271,7 @@ class AllRoundRefresherState extends State<AllRoundRefresher> {
           scrollTop();
         }) : Container();
   }
-
+  //快速返回按钮-返回顶部功能
   void scrollTop() {
     widget.controller.scrollController.animateTo(0.0,
         duration: new Duration(microseconds: 1000), curve: ElasticInCurve());
