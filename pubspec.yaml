@@ -1,6 +1,6 @@
 name: flutter_allroundrefresh
 description: Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.
-version: 1.0.0
+version: 1.0.1
 author: pf <133300871@qq.com>
 homepage: https://github.com/android-pf/flutter_allroundrefresh
 

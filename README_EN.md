@@ -4,7 +4,12 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 
 ### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.
 
-## Download APK experience
+### Update Notes
+
+1.0.1
+
+- ​	Adapt Flutter 1.5.4
+- ​	Fix the problem of default turn-around immobility after upgrade of Flutter 1.5.4
 
 ### Add dependency
 
