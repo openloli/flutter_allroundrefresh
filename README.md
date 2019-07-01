@@ -10,7 +10,7 @@
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^1.0.0
+  flutter_allroundrefresh: ^1.0.1
 ```
 
 ## 使用

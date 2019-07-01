@@ -10,7 +10,7 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^1.0.0
+  flutter_allroundrefresh: ^1.0.1
 ```
 
 ## Use
