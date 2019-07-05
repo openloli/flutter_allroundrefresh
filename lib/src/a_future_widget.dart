@@ -112,6 +112,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
 
   void _onRefresh() {
     if (widget.fRefresh != null) {
+      _refreshController.loadComplete();
       Future.delayed(const Duration(milliseconds: 1000)).then((val) {
         widget.fRefresh.then((result) {
           if (result != null) {
@@ -165,7 +166,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
           if (result != null) {
             CommBean bean = CommBean.fromJson(result);
             if (bean.data == null || bean.data == '') {
-              _refreshController.loadNoData();
+              _refreshController.loadFailed();
             } else {
               if (bean.code == '200') {
                 _refreshController.loadComplete();
