@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MyError2 extends StatelessWidget {
+class YourError2Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180.0,
+      padding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height / 4),
       width: MediaQuery
           .of(context)
           .size
@@ -22,7 +25,6 @@ class MyError2 extends StatelessWidget {
               "images/error2.gif",
               fit: BoxFit.cover,),
           ),
-          Text('暂无数据'),
         ],
       ),
     );

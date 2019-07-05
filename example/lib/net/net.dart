@@ -8,8 +8,8 @@ class HttpManager {
   static const CONTENT_TYPE_data = "text/html; charset=UTF-8";
   static const CONTENT_TYPE_data2 = "data-form";
   static Dio _dio;
-  static final int CONNECR_TIME_OUT = 60000;
-  static final int RECIVE_TIME_OUT = 60000;
+  static final int CONNECR_TIME_OUT = 20000;
+  static final int RECIVE_TIME_OUT = 20000;
   static Map<String, CancelToken> _cancelTokens;
 
 
@@ -17,7 +17,7 @@ class HttpManager {
   initDio({var yourIntercept, yourPEM, yourProxy}) {
     if (_dio == null) {
       _dio = Dio();
-      _dio.options.connectTimeout = CONNECR_TIME_OUT; //60s
+      _dio.options.connectTimeout = CONNECR_TIME_OUT;
       _dio.options.receiveTimeout = RECIVE_TIME_OUT;
 
       ///代理设置
@@ -79,6 +79,7 @@ class HttpManager {
 
   Future<Response> get3({who, path, FormData data, Function callback}) async {
     try {
+
       return await _dio.get(
         path,
       );
@@ -91,12 +92,33 @@ class HttpManager {
   ///刷新框架 之数据访问
   ///1、正常情况返回 Response
   ///2、异常情况（关闭网络等）返回 null
-  Future<Response> post3({who, path, FormData data, Function callback}) async {
+  Future<dynamic> post3({who, path, FormData data, Function callback}) async {
     try {
-      return await _dio.post(
+      Response response = await _dio.post(
         path,
         data: data,
       );
+      if (response.statusCode == HttpStatus.ok) {
+        return json.decode(response.data.toString());
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
+      return null;
+    }
+  }
+
+  Future<dynamic> get33({who, path, FormData data, Function callback}) async {
+    try {
+      Response response = await _dio.get(
+        path,
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        return json.decode(response.data.toString());
+      } else {
+        return null;
+      }
     } catch (e) {
       print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
       return null;

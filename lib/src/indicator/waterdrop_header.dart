@@ -1,10 +1,11 @@
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
+import 'dart:async';
 import 'package:flutter/material.dart'
     hide RefreshIndicatorState, RefreshIndicator;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import '../internals/indicator_wrap.dart';
 import 'package:flutter/cupertino.dart';
-import '../all_round_refresher.dart';
-import 'dart:async';
+import '../smart_refresher.dart';
 
 class WaterDropHeader extends RefreshIndicator {
   final Widget refresh;
@@ -17,18 +18,27 @@ class WaterDropHeader extends RefreshIndicator {
 
   final Color waterDropColor;
 
+  final bool reverse;
+
   const WaterDropHeader({
     Key key,
     this.refresh,
     this.complete,
+    this.reverse: false,
+    Duration completeDuration: const Duration(milliseconds: 600),
     this.failed,
     this.waterDropColor: Colors.grey,
-    this.idleIcon,
-    double triggerDistance: 110.0,
+    this.idleIcon: const Icon(
+      Icons.autorenew,
+      size: 15,
+      color: Colors.white,
+    ),
   }) : super(
-            key: key,
-            triggerDistance: triggerDistance,
-            refreshStyle: RefreshStyle.UnFollow);
+      key: key,
+      height: 80.0,
+      completeDuration: completeDuration,
+      refreshStyle: RefreshStyle.UnFollow);
+
 
   @override
   State<StatefulWidget> createState() {
@@ -40,6 +50,7 @@ class WaterDropHeader extends RefreshIndicator {
 class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
     with TickerProviderStateMixin {
   AnimationController _animationController;
+  AnimationController _dismissCtl;
 
   @override
   void onOffsetChange(double offset) {
@@ -49,116 +60,161 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
     // when readyTorefresh
     if (!_animationController.isAnimating)
       _animationController.value = realOffset;
-    super.onOffsetChange(offset);
   }
 
   @override
-  Future<void> readyToRefresh() {
-    // TODO: implement readyToRefresh
-    return _animationController.animateTo(0.0);
+  Future
+
+  <
+
+  void
+
+  >
+
+  readyToRefresh
+
+  ()
+
+  {
+  // TODO: implement readyToRefresh
+  _dismissCtl.animateTo(0.0);
+  return _animationController.animateTo(0.0);
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    _animationController = AnimationController(
-        vsync: this,
-        lowerBound: 0.0,
-        upperBound: 50.0,
-        duration: Duration(milliseconds: 400));
-    super.initState();
+  // TODO: implement initState
+  _dismissCtl = AnimationController(
+  vsync: this, duration: Duration(milliseconds: 400), value: 1.0);
+  _animationController = AnimationController(
+  vsync: this,
+  lowerBound: 0.0,
+  upperBound: 50.0,
+  duration: Duration(milliseconds: 400));
+  super.initState();
+  }
+
+  @override
+  bool needReverseAll() {
+  // TODO: implement needReverseAll
+  return false;
   }
 
   @override
   Widget buildContent(BuildContext context, RefreshStatus mode) {
-    // TODO: implement buildContent
-    Widget child;
-    if (mode == RefreshStatus.refreshing) {
-      if (widget.refresh != null)
-        child = widget.refresh;
-      else
-        child = CupertinoActivityIndicator();
-    } else if (mode == RefreshStatus.completed) {
-      if (widget.complete != null)
-        child = widget.complete;
-      else
-        child = Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              Icons.done,
-              color: Colors.grey,
-            ),
-            Container(
-              width: 15.0,
-            ),
-            Text(
-              "刷新完成",
-              style: TextStyle(color: Colors.grey),
-            )
-          ],
-        );
-    } else if (mode == RefreshStatus.failed) {
-      if (widget.failed != null)
-        child = widget.failed;
-      else
-        child = Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(
-              Icons.close,
-              color: Colors.grey,
-            ),
-            Container(
-              width: 15.0,
-            ),
-            Text("刷新失败", style: TextStyle(color: Colors.grey))
-          ],
-        );
-    } else if (mode == RefreshStatus.idle || mode == RefreshStatus.canRefresh) {
-      return Container(
-        height: 80.0,
-        child: CustomPaint(
-          child: Container(
-            alignment: Alignment.topCenter,
-            margin: EdgeInsets.only(top: 15.0),
-            child: widget.idleIcon != null
-                ? widget.idleIcon
-                : const Icon(
-                    Icons.airplanemode_active,
-                    size: 15,
-                    color: Colors.white,
-                  ),
-          ),
-          painter: _QqPainter(
-              color: widget.waterDropColor,
-              value: _animationController.value,
-              reverse: refresher.widget.child.reverse),
-        ),
-      );
-    }
-    return Container(
-      height: 60.0,
-      child: Center(
-        child: child,
-      ),
-    );
+  // TODO: implement buildContent
+  Widget child;
+  if (mode == RefreshStatus.refreshing) {
+  child = widget.refresh ??
+  SizedBox(
+  width: 25.0,
+  height: 25.0,
+  child: defaultTargetPlatform == TargetPlatform.iOS
+  ? const CupertinoActivityIndicator()
+      : const CircularProgressIndicator(strokeWidth: 2.0),
+  );
+  } else
+  if (mode == RefreshStatus.completed) {
+  child = widget.complete ??
+  Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+  const Icon(
+  Icons.done,
+  color: Colors.grey,
+  ),
+  Container(
+  width: 15.0,
+  ),
+  Text(
+  "刷新完成",
+  style: TextStyle(color: Colors.grey),
+  )
+  ],
+  );
+  } else
+  if (mode == RefreshStatus.failed) {
+  child = widget.failed ??
+  Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+  const Icon(
+  Icons.close,
+  color: Colors.grey,
+  ),
+  Container(
+  width: 15.0,
+  ),
+  Text("刷新失败", style: TextStyle(color: Colors.grey))
+  ],
+  );
+  } else
+  if (mode == RefreshStatus.idle || mode == RefreshStatus.canRefresh) {
+  return FadeTransition(
+  child: Container(
+  child: Stack(
+  children: <Widget>[
+  RotatedBox(
+  child: CustomPaint(
+  child: Container(
+  height: 80.0,
+  ),
+  painter: _QqPainter(
+  color: widget.waterDropColor,
+  listener: _animationController,
+  ),
+  ),
+  quarterTurns: widget.reverse ? 10 : 0,
+  ),
+  Container(
+  alignment: widget.reverse
+  ? Alignment.bottomCenter
+      : Alignment.topCenter,
+  margin: widget.reverse
+  ? EdgeInsets.only(bottom: 15.0)
+      : EdgeInsets.only(top: 15.0),
+  child: widget.idleIcon,
+  )
+  ],
+  ),
+  height: 80.0,
+  ),
+  opacity: _dismissCtl);
+  }
+  return Container(
+  height: 80.0,
+  child: Center(
+  child: child,
+  ),
+  );
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    _animationController.dispose();
-    super.dispose();
+  void resetValue() {
+  // TODO: implement resetValue
+  _animationController.reset();
+  _dismissCtl.value = 1.0;
+  }
+
+  @override
+  void dispose()
+
+  {
+  // TODO: implement dispose
+  _dismissCtl.dispose();
+  _animationController.dispose();
+  super.dispose();
   }
 }
 
 class _QqPainter extends CustomPainter {
   final Color color;
-  final double value;
+  final Animation<double> listener;
+
+  double get value => listener.value;
   final Paint painter = Paint();
-  final bool reverse;
-  _QqPainter({this.color, this.value, this.reverse});
+
+  _QqPainter({this.color, this.listener}) : super(repaint: listener);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -170,7 +226,7 @@ class _QqPainter extends CustomPainter {
 
     final double scaleRatio = 0.1;
 
-    final double offset = reverse ? -value : value;
+    final double offset = value;
 
     painter.color = color;
     canvas.drawCircle(Offset(middleW, originH), circleSize, painter);
@@ -196,32 +252,16 @@ class _QqPainter extends CustomPainter {
         middleW + circleSize,
         originH);
     //draw upper circle
-    if (!reverse) {
-      path.moveTo(middleW - circleSize, originH);
-      path.arcToPoint(Offset(middleW + circleSize, originH),
-          radius: Radius.circular(circleSize));
+    path.moveTo(middleW - circleSize, originH);
+    path.arcToPoint(Offset(middleW + circleSize, originH),
+        radius: Radius.circular(circleSize));
 
-      //draw lowwer circle
-      path.moveTo(
-          middleW + circleSize - value * scaleRatio * 2, originH + offset);
-      path.arcToPoint(
-          Offset(
-              middleW - circleSize + value * scaleRatio * 2, originH + offset),
-          radius: Radius.circular(value * scaleRatio));
-    } else {
-      path.moveTo(middleW + circleSize, originH);
-      path.arcToPoint(Offset(middleW - circleSize, originH),
-          radius: Radius.circular(circleSize));
-
-      //draw lowwer circle
-      path.moveTo(
-          middleW - circleSize + value * scaleRatio * 2, originH + offset);
-      path.arcToPoint(
-          Offset(
-              middleW + circleSize - value * scaleRatio * 2, originH + offset),
-          radius: Radius.circular(value * scaleRatio));
-    }
-
+    //draw lowwer circle
+    path.moveTo(
+        middleW + circleSize - value * scaleRatio * 2, originH + offset);
+    path.arcToPoint(
+        Offset(middleW - circleSize + value * scaleRatio * 2, originH + offset),
+        radius: Radius.circular(value * scaleRatio));
     path.close();
     canvas.drawPath(path, painter);
   }

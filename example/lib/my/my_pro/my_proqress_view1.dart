@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyProgressView1 extends StatelessWidget {
+class YourProgress1Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Center(
@@ -9,7 +9,7 @@ class MyProgressView1 extends StatelessWidget {
         height: 30.0,
         child: new CircularProgressIndicator(
           strokeWidth: 2.0,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.yellow,
         ),
       ),
     );

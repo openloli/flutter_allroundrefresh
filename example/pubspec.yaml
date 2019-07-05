@@ -13,6 +13,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   http: 0.12.0
+  dio: ^2.0.15
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,6 +34,7 @@ flutter:
   assets:
     - images/loading.gif
     - images/error2.gif
+    - images/xiaoxin.gif
     - images/error.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:

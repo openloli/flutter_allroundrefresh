@@ -1,9 +1,9 @@
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
-import 'package:flutter/material.dart'
-    hide RefreshIndicator, RefreshIndicatorState;
-import '../internals/default_constants.dart';
+import 'package:flutter/widgets.dart';
 import '../internals/indicator_wrap.dart';
-import '../all_round_refresher.dart';
+import '../smart_refresher.dart';
+
+typedef Widget HeaderBuilder(BuildContext context, RefreshStatus mode);
+typedef Widget FooterBuilder(BuildContext context, LoadStatus mode);
 
 class CustomHeader extends RefreshIndicator {
   final HeaderBuilder builder;
@@ -12,13 +12,13 @@ class CustomHeader extends RefreshIndicator {
     Key key,
     @required this.builder,
     double height: default_height,
+    Duration completeDuration: const Duration(milliseconds: 600),
     RefreshStyle refreshStyle: RefreshStyle.Follow,
-    double triggerDistance: default_refresh_triggerDistance,
   }) : super(
-            key: key,
-            triggerDistance: triggerDistance,
-            refreshStyle: refreshStyle,
-            height: height);
+      key: key,
+      completeDuration: completeDuration,
+      refreshStyle: refreshStyle,
+      height: height);
 
   @override
   State<StatefulWidget> createState() {
@@ -41,14 +41,8 @@ class CustomFooter extends LoadIndicator {
   const CustomFooter({
     Key key,
     @required this.builder,
-    bool autoLoad: true,
     Function onClick,
-    double triggerDistance: default_load_triggerDistance,
-  }) : super(
-            key: key,
-            autoLoad: autoLoad,
-            triggerDistance: triggerDistance,
-            onClick: onClick);
+  }) : super(key: key, onClick: onClick);
 
   @override
   State<StatefulWidget> createState() {
