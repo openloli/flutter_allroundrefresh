@@ -10,104 +10,101 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^1.0.1
+  flutter_allroundrefresh: ^2.0.0
 ```
 
 ## Use
 
+1、Initialization Method, Internationalization Configuration (Part), Status Code Configuration
+
 ```flutter
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
-...
-RefreshController _refreshController;
-var resultStatus = ResultStatus.init;
-		...
-	    body: AllRoundRefresher(
-        resultStatus: resultStatus,
-        enablePullDown: true,
-        enablePullUp: true,
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        onLoading: _onLoading,
-        child: "your child"
-        errCallback: () {
-			...
-        },
-      ),
-      ...
- @override
-  void dispose() {
-    _refreshController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-	...
-    _refreshController = new RefreshController(); 
-    //init get data
-    super.initState();
-  }
-
-  void _onRefresh() {
-   //Refresh data
-  }
-
-
-  void _onLoading() {
-  	//load more
-  }
-
-
-  _surprise(up) async {
-	...
-    ARefreshWidgetHelper.refresh(
-        refreshController: _refreshController,
-        response: "current page acquisition method",
-        callbackNormal: (json) {
-       	...
-       	//refresh condition processing, load more processing
-        },
-        callbackError: (msg) {
-          ...
-       	//refresh data exception handling, load more exception handling
-        }
-    );
-  }
+AFutureWidget.init( );
 ```
 
-After copying the above code from the common list page, you only need to write the item.
+2、Import
+
+```flutter
+import 'package:flutter_allroundrefresh/future_refresh.dart';
+```
+
+3、Use
+
+```flutter
+...
+body: AFutureWidget(
+        childWidget: yourContentWidget(),
+        errorWidget: YourError2Widget(),
+        progressWidget: YourProgress2Widget(),
+        fRefresh: MainDao.getCourseList(page: 1,),
+        fLoading: MainDao.getCourseList(page: page,),
+        onLoadingCallback: () {page = page + 1;setState(() {});},
+        onRefreshCallback: () {page = 1;modelList.clear();setState(() {});},
+        tokenInvalidCallback: () {
+        //Callback processing for token failure is usually a pop-up dialog box, //click OK, close the front page, and open the login page.
+        },
+        dataCallback: (List<dynamic> data) {
+          data.forEach((v) {
+            modelList.add(new CourseListData.fromJson(v));
+          });
+          setState(() {});
+        },
+      ),
+...
+```
+
+#### Explain
+
+##### AFutureWidgetComponents (highlighted as mandatory)
+
+| field                 | describe1       | describe2                                                    |
+| --------------------- | --------------- | ------------------------------------------------------------ |
+| enablePullDown        | true            | Not to fill in                                               |
+| ==childWidget==       | ScrollView类型  | page item                                                    |
+| errorWidget           | error page      | Customizable, pictures, GIF can be                           |
+| progressWidget        | Initial loading | Customizable                                                 |
+| ==fRefresh==          | Future<dynamic> | Refresh new method, method return type must be consistent    |
+| fLoading              | Future<dynamic> | Load more methods, no fill = no load more                    |
+| onLoadingCallback     |                 | Load more callbacks and fill in when loading more            |
+| ==onRefreshCallback== |                 | New Method of Refreshing                                     |
+| tokenInvalidCallback  |                 | Login failure handling callback, depending on the project to see if it is necessary |
+| ==dataCallback==      |                 | Data Processing Callback                                     |
+| header                |                 | Data Processing Callback                                     |
+| footer                |                 | Load more                                                    |
+
+###### Focus on: fRefresh corresponds to a web page acquisition method. The return type of the method is ==Future < dynamic >==. Meanwhile, the data format returned by the method must be in the following format:
+
+```flutter
+{
+    "code": "Default 200 Access Successful, 900 Logon Failure",
+    "msg": "",
+    "data": {},//  "data": [],
+}
+```
 
 
 
-## Props Table
+##### AFutureWidget.init( );   Initialization Method, Internationalization Configuration Method and State Code Configuration Method
 
-AllRoundRefresher:
+Initialization methods must be turned on
 
-| Attribute Name | Attribute Explain            | Default Value | Requirement |
-| -------------- | ---------------------------- | ------------- | :---------: |
-| resultStatus   | result stater                | null          |  necessary  |
-| controller     | state controller             | null          |  necessary  |
-| child          | your widget                  | null          |  necessary  |
-| onRefresh      | refresh data                 | null          |  necessary  |
-| onLoading      | load more                    | null          |  necessary  |
-| header         | refresh header               | ClassicHeader |  optional   |
-| footer         | footer loading               | ClassicFooter |  optional   |
-| enablePullDown | pull-down switch             | true          |  optional   |
-| enablePullUp   | load more switch             | false         | 可optional  |
-| progress       | custom initial progress view | ProgressView  |  optional   |
-| error          | custom error page            | Container     |  optional   |
-| enableQuickTop | quick return to top switch   | true          |  optional   |
+The following texts are currently available and supported for international configuration and status code configuration:
 
-ARefreshWidgetHelper:
+| field            | Default                                      |
+| ---------------- | -------------------------------------------- |
+| loadingText      | 加载中...                                    |
+| noDataText       | 没有更多数据了                               |
+| idleText         | 加载更多                                     |
+| failedText       | 加载失败，点击重试                           |
+| errorMsg         | 暂无数据                                     |
+| normalCode       | 200                                          |
+| tokenInvalidCode | 900                                          |
+| netClose         | 检测到手机没有网络，请打开网络后重试！       |
+| netWifiLose      | 网络差或服务器超时，请稍后重试或使用4G尝试！ |
+| netLoseOrTimeOut | 网络差或服务器超时，请稍后重试!              |
 
-| Attribute Name    | Attribute Explain                                | Requirement |
-| ----------------- | ------------------------------------------------ | :---------: |
-| refreshController | state controller                                 |  necessary  |
-| response          | the result set of the method of getting the data |  necessary  |
-| callbackNormal    | normal data callback                             |  necessary  |
-| callbackError     | abnormal data callback                           |  necessary  |
+1、If there is no internationalized configuration in the project, you only need to use AFutureWidget. init () once.
 
-
+2、Internationalization requires configuration in AFutureWidget.init (loadingText: xxx...); configuration (except normalCode, tokenInvalidCode)
 
 # Other
 

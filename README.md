@@ -10,105 +10,105 @@
 
 ```flutter
 dependencies:
-  flutter_allroundrefresh: ^1.0.1
+  flutter_allroundrefresh: ^2.0.0
 ```
 
 ## 使用
 
+1、初始化方法、国际化配置（部分）、状态码配置
+
 ```flutter
-import 'package:flutter_allroundrefresh/flutter_allroundrefresh.dart';
-...
-RefreshController _refreshController;
-var resultStatus = ResultStatus.init;
-		...
-	    body: AllRoundRefresher(
-        resultStatus: resultStatus,
-        enablePullDown: true,
-        enablePullUp: true,
-        header: WaterDropHeader(),
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        onLoading: _onLoading,
-        child: "your child"
-        errCallback: () {
-         ...
-        },
-      ),
-      ...
- @override
-  void dispose() {
-    _animController.dispose();
-    _refreshController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-	...
-    _refreshController = new RefreshController(); 
-    //第一次(初始)获取网络数据
-    
-    super.initState();
-  }
-
-  void _onRefresh() {
-   //刷新数据
-  }
-
-
-  void _onLoading() {
-  	//加载更多
-  }
-
-
-  _surprise(up) async {
-	...
-    ARefreshWidgetHelper.refresh(
-        refreshController: _refreshController,
-        response: "当前页面获取数据的方法",
-        callbackNormal: (json) {
-       	...
-       	//刷新情况处理、加载更多处理
-        },
-        callbackError: (msg) {
-          ...
-       	//刷新数据异常处理、加载更多异常处理
-        }
-    );
-  }
+AFutureWidget.init( );
 ```
 
-常见list页面复制以上代码后，只需要编写 item 即可
+2、引入
+
+```flutter
+import 'package:flutter_allroundrefresh/future_refresh.dart';
+```
+
+3、使用
+
+```flutter
+...
+body: AFutureWidget(
+        childWidget: yourContentWidget(),
+        errorWidget: YourError2Widget(),
+        progressWidget: YourProgress2Widget(),
+        fRefresh: MainDao.getCourseList(page: 1,),
+        fLoading: MainDao.getCourseList(page: page,),
+        onLoadingCallback: () {page = page + 1;setState(() {});},
+        onRefreshCallback: () {page = 1;modelList.clear();setState(() {});},
+        tokenInvalidCallback: () {
+        //token失效的回调处理 通常为弹出对话框，点击确定,关闭前置页，打开登录页
+        },
+        dataCallback: (List<dynamic> data) {
+          data.forEach((v) {
+            modelList.add(new CourseListData.fromJson(v));
+          });
+          setState(() {});
+        },
+      ),
+...
+```
+
+#### 说明
+
+##### AFutureWidget组件（高亮为必填）
+
+| 字段                  | 默认值/返回类型 | 说明                                 |
+| --------------------- | --------------- | ------------------------------------ |
+| enablePullDown        | true            | 可不填                               |
+| ==childWidget==       | ScrollView类型  | 页面item                             |
+| errorWidget           | 初始错误页      | 可自定义，图片、gif均可              |
+| progressWidget        | 初始转圈        | 可自定义                             |
+| ==fRefresh==          | Future<dynamic> | 刷新方法，方法返回类型必须保持一致   |
+| fLoading              | Future<dynamic> | 加载更多方法，不填=无加载更多        |
+| onLoadingCallback     |                 | 加载更多回调，加载更多时必填         |
+| ==onRefreshCallback== |                 | 刷新方法                             |
+| tokenInvalidCallback  |                 | 登录失效处理回调，根据项目看是否需要 |
+| ==dataCallback==      |                 | 数据处理回调                         |
+| header                |                 | 刷新头                               |
+| footer                |                 | 加载更多                             |
+
+###### 重点说明：fRefresh 对应是的某个页面的网络获取方法，方法的返回类型为==Future<dynamic>==，同时，方法返回的数据格式必须是以下格式：
+
+```flutter
+{
+    "code": "默认200访问成功，900登录失效",
+    "msg": "",
+    "data": {},//  "data": [],
+}
+```
 
 
 
-## 属性说明
+##### AFutureWidget.init( );   初始化方法、国际化配置方法、状态码配置方法 
 
-AllRoundRefresher:
+必须开启初始化方法
 
-| 属性名         | 说明             | 默认          | 必要性 |
-| -------------- | ---------------- | ------------- | :----: |
-| resultStatus   | 结果状态器       | null          |  必要  |
-| controller     | 状态控制器       | null          |  必要  |
-| child          | 内部组件         | null          |  必要  |
-| onRefresh      | 刷新数据         | null          |  必要  |
-| onLoading      | 加载更多         | null          |  必要  |
-| header         | 刷新头           | ClassicHeader |  可选  |
-| footer         | 底部加载         | ClassicFooter |  可选  |
-| enablePullDown | 下拉开关         | true          |  可选  |
-| enablePullUp   | 加载更多开关     | false         |  可选  |
-| progress       | 自定义初始加载   | ProgressView  |  可选  |
-| error          | 自定义错误页面   | Container     |  可选  |
-| enableQuickTop | 快速返回顶部开关 | true          |  可选  |
+国际化配置、状态码配置 目前出现及支持的文案如下：
 
-ARefreshWidgetHelper:
+| 字段             | 默认                                         |
+| ---------------- | -------------------------------------------- |
+| loadingText      | 加载中...                                    |
+| noDataText       | 没有更多数据了                               |
+| idleText         | 加载更多                                     |
+| failedText       | 加载失败，点击重试                           |
+| errorMsg         | 暂无数据                                     |
+| normalCode       | 200                                          |
+| tokenInvalidCode | 900                                          |
+| netClose         | 检测到手机没有网络，请打开网络后重试！       |
+| netWifiLose      | 网络差或服务器超时，请稍后重试或使用4G尝试！ |
+| netLoseOrTimeOut | 网络差或服务器超时，请稍后重试!              |
 
-| 属性名            | 说明                   | 必要性 |
-| ----------------- | ---------------------- | :----: |
-| refreshController | 状态控制器             |  必要  |
-| response          | 获取数据的方法的结果集 |  必要  |
-| callbackNormal    | 正常数据回调           |  必要  |
-| callbackError     | 非正常数据回调         |  必要  |
+1、如果项目中没有国际化配置，则只需要条用一次AFutureWidget.init( ); 即可，
+
+2、国际化则需要配置在AFutureWidget.init(loadingText:xxx... ); 进行配置（normalCode、tokenInvalidCode除外）
+
+
+
+
 
 
 
