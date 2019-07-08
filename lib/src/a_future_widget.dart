@@ -9,11 +9,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_allroundrefresh/src/util/sp_util.dart';
 import '../future_refresh.dart';
 import 'dart:async';
 
 
-class AFutureWidget<T> extends StatefulWidget {
+class AFutureWidget extends StatefulWidget {
 
   final bool enablePullDown; //是否开启下拉刷新
 
@@ -29,8 +30,8 @@ class AFutureWidget<T> extends StatefulWidget {
   final Function onLoadingCallback; //加载更多回调，用于page+1
   final Function tokenInvalidCallback; //Token失效回调，用于处理对应事件
 
-  final normalCode; //获取数据成功的code,默认200
-  final tokenInvalidCode; //token失效的code,默认900
+//  final normalCode; //获取数据成功的code,默认200
+//  final tokenInvalidCode; //token失效的code,默认900
 
   final RefreshIndicator header;
   final LoadIndicator footer;
@@ -48,8 +49,6 @@ class AFutureWidget<T> extends StatefulWidget {
     this.onRefreshCallback,
     this.onLoadingCallback,
     this.tokenInvalidCallback,
-    this.normalCode = '200',
-    this.tokenInvalidCode = '900',
 
     this.header,
     this.footer,
@@ -60,6 +59,32 @@ class AFutureWidget<T> extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => AFutureWidgetState();
 
+
+  static void init({
+    loadingText: '加载中...',
+    noDataText: '没有更多数据了',
+    idleText: '加载更多',
+    failedText: '加载失败，点击重试',
+    errorMsg: '暂无数据',
+    normalCode: '200',
+    tokenInvalidCode: '900',
+    netClose: '检测到手机没有网络，请打开网络后重试！',
+    netWifiLose: '网络差或服务器超时，请稍后重试或使用4G尝试！',
+    netLoseOrTimeOut: '网络差或服务器超时，请稍后重试!',
+
+  }) async {
+    await SpUtil.getInstance();
+    SpUtil.putString('loadingText', loadingText);
+    SpUtil.putString('noDataText', noDataText);
+    SpUtil.putString('idleText', idleText);
+    SpUtil.putString('failedText', failedText);
+    SpUtil.putString('errorMsg', errorMsg);
+    SpUtil.putString('normalCode', normalCode);
+    SpUtil.putString('tokenInvalidCode', tokenInvalidCode);
+    SpUtil.putString('netClose', netClose);
+    SpUtil.putString('netWifiLose', netWifiLose);
+    SpUtil.putString('netLoseOrTimeOut', netLoseOrTimeOut);
+  }
 
   static AFutureWidgetState of(BuildContext context) {
     return context?.ancestorStateOfType(
@@ -73,11 +98,15 @@ class AFutureWidgetState extends State<AFutureWidget> {
       first = true,
       error = false;
   RefreshController _refreshController;
-  var errorMsg = '暂无数据';
+  var errorMsg, normalCode, tokenInvalidCode;
 
   @override
   void initState() {
     _refreshController = new RefreshController(); //刷新框架
+//    AFutureWidget.initI18NAndCode();
+    errorMsg = SpUtil.getString('errorMsg');
+    normalCode = SpUtil.getString('normalCode');
+    tokenInvalidCode = SpUtil.getString('tokenInvalidCode');
     first = true;
     _onRefresh();
     super.initState();
@@ -97,10 +126,10 @@ class AFutureWidgetState extends State<AFutureWidget> {
   Future<String> checkConnectivity() async {
     var connectivityResult = await(Connectivity().checkConnectivity());
     return connectivityResult == ConnectivityResult.none
-        ? '检测到手机没有网络，请打开网络后重试！'
+        ? SpUtil.getString('netClose')
         : (connectivityResult == ConnectivityResult.wifi
-        ? '网络差或服务器超时，请稍后重试或使用4G尝试！'
-        : '网络差或服务器超时，请稍后重试!');
+        ? SpUtil.getString('netWifiLose')
+        : SpUtil.getString('netLoseOrTimeOut'));
   }
 
   @override
@@ -124,9 +153,9 @@ class AFutureWidgetState extends State<AFutureWidget> {
             } else {
               _refreshController.refreshFailed();
               widget.onRefreshCallback();
-              if (bean.code == widget.normalCode) {
+              if (bean.code == normalCode) {
                 widget.dataCallback(bean.data);
-              } else if (bean.code == widget.tokenInvalidCode) {
+              } else if (bean.code == tokenInvalidCode) {
                 callDialog(
                     title: bean.msg,
                     context: context,
@@ -195,10 +224,11 @@ class AFutureWidgetState extends State<AFutureWidget> {
               ? WaterDropHeader()
               : MaterialClassicHeader(),
           footer: ClassicFooter(
-              loadingText: '加载中...',
-              noDataText: '没有更多数据了',
-              idleText: '加载更多',
-              failedText: '加载失败，点击重试'),
+            loadingText: SpUtil.getString('loadingText'),
+            noDataText: SpUtil.getString('noDataText'),
+            idleText: SpUtil.getString('idleText'),
+            failedText: SpUtil.getString('failedText'),
+          ),
           controller: _refreshController,
           onRefresh: _onRefresh,
           onLoading: _onLoading,

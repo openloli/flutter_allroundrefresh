@@ -32,6 +32,6 @@ callDialog({context, title, cancel = true, Function callback}) async {
       );
     },
   ).then((val) {
-    print(val);
+    print('弹出框 $val');
   });
 }
