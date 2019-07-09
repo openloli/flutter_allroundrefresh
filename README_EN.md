@@ -2,8 +2,7 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 
 # flutter_allroundrefresh
 
-### Based on pull_to_refresh, the initial pull-around, data exception, network exception, retry, and full-featured components of the network package and data middleware from the entry page to the exit page are implemented based on the original pull-down refresh and pull-up load.
-
+### Set Initial lap + network normal / abnormal + data normal / abnormal + retry + login invalid + pull-down refresh + load more versatile components.
 
 
 ### Add dependency

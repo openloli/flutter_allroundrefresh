@@ -2,8 +2,7 @@
 
 # flutter_allroundrefresh
 
-### 基于  [pull_to_refresh](<https://pub.flutter-io.cn/packages/pull_to_refresh> ) 在原有下拉刷新、上拉加载更多的基础上实现了初始转圈、数据异常、网络异常、重试以及网络封装、数据中间件的从进入页面到退出页面的全功能组件。
-
+### 集 初始转圈+网络正常/异常+数据正常/异常+重试+登录失效+下拉刷新+加载更多 的全能组件。
 
 
 ## 添加依赖
