@@ -67,6 +67,7 @@ class AFutureWidget extends StatefulWidget {
     failedText: '加载失败，点击重试',
     errorMsg: '暂无数据',
     normalCode: '200',
+    noDataCode: '404',
     tokenInvalidCode: '900',
     netClose: '检测到手机没有网络，请打开网络后重试！',
     netWifiLose: '网络差或服务器超时，请稍后重试或使用4G尝试！',
@@ -80,6 +81,7 @@ class AFutureWidget extends StatefulWidget {
     SpUtil.putString('failedText', failedText);
     SpUtil.putString('errorMsg', errorMsg);
     SpUtil.putString('normalCode', normalCode);
+    SpUtil.putString('noDataCode', noDataCode);
     SpUtil.putString('tokenInvalidCode', tokenInvalidCode);
     SpUtil.putString('netClose', netClose);
     SpUtil.putString('netWifiLose', netWifiLose);
@@ -98,7 +100,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
       first = true,
       error = false;
   RefreshController _refreshController;
-  var errorMsg, normalCode, tokenInvalidCode;
+  var errorMsg, normalCode,noDataCode, tokenInvalidCode;
 
   @override
   void initState() {
@@ -106,6 +108,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
 //    AFutureWidget.initI18NAndCode();
     errorMsg = SpUtil.getString('errorMsg');
     normalCode = SpUtil.getString('normalCode');
+    noDataCode = SpUtil.getString('noDataCode');
     tokenInvalidCode = SpUtil.getString('tokenInvalidCode');
     first = true;
     _onRefresh();
@@ -144,6 +147,8 @@ class AFutureWidgetState extends State<AFutureWidget> {
       _refreshController.loadComplete();
       Future.delayed(const Duration(milliseconds: 1000)).then((val) {
         widget.fRefresh.then((result) {
+          print('result = ${result.runtimeType}');
+          print('result = ${result}');
           if (result != null) {
             first = false;
             error = false;
@@ -197,10 +202,10 @@ class AFutureWidgetState extends State<AFutureWidget> {
             if (bean.data == null || bean.data == '') {
               _refreshController.loadFailed();
             } else {
-              if (bean.code == '200') {
+              if (bean.code == normalCode) {
                 _refreshController.loadComplete();
                 widget.dataCallback(bean.data);
-              } else if (bean.code == '404') {
+              } else if (bean.code == noDataCode) {
                 _refreshController.loadNoData();
               }
             }

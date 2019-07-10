@@ -8,16 +8,24 @@ class YourError1Widget extends StatelessWidget {
           .of(context)
           .size
           .height / 4),
-      height: 160.0,
       width: MediaQuery
           .of(context)
           .size
           .width,
-      child: Container(
-        alignment: Alignment.center,
-        child: Image.asset(
-          "images/error.jpg",
-          fit: BoxFit.cover,),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 160.0,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            alignment: Alignment.center,
+            child: Image.asset(
+              "images/error.jpg",
+              fit: BoxFit.cover,),
+          ),
+        ],
       ),
     );
   }

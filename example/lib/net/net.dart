@@ -66,33 +66,23 @@ class HttpManager {
     _dio.interceptors.add(yourIntercept);
   }
 
-  get({path, Function callback}) async {
-    await _dio.get(path).then((response) {
-      print("[${response.statusCode}]");
-      if (response.statusCode == HttpStatus.ok) {
-        callback(response.data);
-      } else {
-        callback('${response.statusCode}');
-      }
-    });
-  }
-
-  Future<Response> get3({who, path, FormData data, Function callback}) async {
+  Future<dynamic> get({who, path, Function callback}) async {
     try {
-
-      return await _dio.get(
+      Response response = await _dio.get(
         path,
       );
+      if (response.statusCode == HttpStatus.ok) {
+        return json.decode(response.data);
+      } else {
+        return null;
+      }
     } catch (e) {
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
+      print("[${who == null ? '' : who}]=> get catch = \n${e.toString()}");
       return null;
     }
   }
 
-  ///刷新框架 之数据访问
-  ///1、正常情况返回 Response
-  ///2、异常情况（关闭网络等）返回 null
-  Future<dynamic> post3({who, path, FormData data, Function callback}) async {
+  Future<dynamic> post1({who, path, FormData data, Function callback}) async {
     try {
       Response response = await _dio.post(
         path,
@@ -109,136 +99,5 @@ class HttpManager {
     }
   }
 
-  Future<dynamic> get33({who, path, FormData data, Function callback}) async {
-    try {
-      Response response = await _dio.get(
-        path,
-      );
-      if (response.statusCode == HttpStatus.ok) {
-        return json.decode(response.data.toString());
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-      return null;
-    }
-  }
-
-  Future<Response> post5({who, path, FormData data, Function callback}) async {
-    try {
-      return await _dio.post(
-        path,
-        data: data,
-      ).then((response) {
-        print("[${who == null ? '' : who}]=> code = ${response.statusCode}");
-        if (response.statusCode == HttpStatus.ok) {
-          return json.decode(response.data.toString());
-        } else {
-          return null;
-        }
-      });
-    } catch (e) {
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-      return null;
-    }
-  }
-
-  post1({who, path, FormData data, Function callback}) async {
-    try {
-      await _dio.post(
-        path,
-        data: data,
-      ).then((response) {
-        print("[${who == null ? '' : who}]=> code = ${response.statusCode}");
-        if (response.statusCode == HttpStatus.ok) {
-          callback(json.decode(response.data.toString()));
-        } else {
-          callback(null);
-        }
-      });
-    } catch (e) {
-      callback(null);
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-    }
-  }
-
-//  download2({who, path, Function callback}) async {
-//    return _dio;
-//  }
-//
-//  download({who, path, Function callback}) async {
-//    print('download ');
-//    try {
-////      final dir = await getApplicationDocumentsDirectory();
-//      String dir = (await getExternalStorageDirectory()).path;
-//      print('path = ${dir}/wzkt.apk');
-//      await _dio.download(path, "${dir}/wzkt.apk",
-//          onReceiveProgress: (progress, all) {
-//            callback(all, progress);
-//          });
-//    } catch (e) {
-//      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-//    }
-//  }
-
-
-
-  post4({ path, FormData data}) async {
-    try {
-      return await _dio.post(
-        path,
-        data: data,
-      );
-    } catch (e) {
-      return null;
-    }
-  }
-
-  post2({who, path, FormData data, Function callback}) async {
-    try {
-      await _dio.post(
-        path,
-        data: data,
-      ).then((response) {
-        print("[${who == null ? '' : who}]=> response code = ${response
-            .statusCode}");
-        if (response.statusCode == HttpStatus.ok) {
-          callback(response.data);
-        } else {
-          callback('${response.statusCode}');
-        }
-      });
-    } catch (e) {
-      callback(null);
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-    }
-  }
-
-  post(path, {String who, Map<String,
-      dynamic> queryParameters, FormData data, Function callback}) async {
-    try {
-      dynamic result = await _dio.post(
-        path,
-        data: data,
-      ).then((response) {
-        print("[${who == null ? '' : who}]=> code = ${response.statusCode}");
-        if (response.statusCode == HttpStatus.ok) {
-          return response.data;
-        } else {
-          return response.statusCode;
-        }
-      });
-      Future.delayed(Duration(milliseconds: 500), () {
-        print("[${who == null ? '' : who}]=> path = ${path}");
-        print("[${who == null ? '' : who}]=> post jsons = \n${result}");
-        callback(result);
-      });
-    } catch (e) {
-      ///这里需要 新增一个errrobean，封装异常数据，以便解析使用
-      print("[${who == null ? '' : who}]=> post catch = \n${e.toString()}");
-      callback(null);
-    }
-  }
 
 }
