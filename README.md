@@ -126,6 +126,16 @@ AFutureWidget组件
 
 [由于使用的是mocky模拟接口 我打包的正式包是无法获取数据的，也就是大家荡下来以后example跑起来也可能是没有数据的，具体跑起来点击这里](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/README.md)
 
+
+
+## 常见问题
+
+- type 'String' is not a subtype of type 'Map<String, dynamic>'
+
+- demo中都拿不到数据
+
+  
+
 ## 其他
 
 **下载链接**
