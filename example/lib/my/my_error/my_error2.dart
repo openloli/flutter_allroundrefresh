@@ -22,7 +22,7 @@ class YourError2Widget extends StatelessWidget {
                 .width,
             alignment: Alignment.center,
             child: Image.asset(
-              "images/error2.gif",
+              "assets/images/error2.gif",
               fit: BoxFit.cover,),
           ),
         ],

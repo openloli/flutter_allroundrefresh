@@ -14,7 +14,7 @@ class MyHeader1 extends StatelessWidget {
         width: 30.0,
         height: 30.0,
         child: Image.asset(
-          "images/loading.gif",
+          "assets/images/loading.gif",
           fit: BoxFit.fill,),
       ),
     );

@@ -8,7 +8,7 @@ class YourProgress2Widget extends StatelessWidget {
         width: 80.0,
         height: 80.0,
         child: Image.asset(
-          "images/xiaoxin.gif",
+          "assets/images/xiaoxin.gif",
           fit: BoxFit.fill,
         ),
       ),
