@@ -39,7 +39,7 @@ class _BottomBarHomePageState extends State<BottomBarHomePage>
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[SimpleMyPage1(), SimpleMyPage2(), SimpleMyPage3()],
+        children: <Widget>[SimplePage1(), SimplePage3(),SimplePage2() ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabController.index,

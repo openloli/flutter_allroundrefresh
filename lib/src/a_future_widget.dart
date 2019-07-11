@@ -158,8 +158,13 @@ class AFutureWidgetState extends State<AFutureWidget> {
             } else {
               _refreshController.refreshFailed();
               widget.onRefreshCallback();
+              print('bean.code ${bean.code}');
+              print('noDataCode ${noDataCode}');
               if (bean.code == normalCode) {
                 widget.dataCallback(bean.data);
+              } else if (bean.code == noDataCode) {
+                errorMsg = bean.msg;
+                error = true;
               } else if (bean.code == tokenInvalidCode) {
                 callDialog(
                     title: bean.msg,
@@ -253,6 +258,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
         new Offstage(
           offstage: error ? false : true,
           child: new Container(
+            alignment: Alignment.center,
             color: Colors.white70,
             child: GestureDetector(
               onTap: () {

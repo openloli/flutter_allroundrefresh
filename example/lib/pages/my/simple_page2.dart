@@ -1,15 +1,17 @@
 import 'package:flutter_allroundrefresh/future_refresh.dart';
+import 'package:flutter_allroundrefresh_example/my/my_error/my_error1.dart';
+import 'package:flutter_allroundrefresh_example/my/my_pro/my_proqress_view2.dart';
 import 'package:flutter_allroundrefresh_example/net/bean/simple_bean.dart';
 import 'package:flutter_allroundrefresh_example/net/dao/simple_dao.dart';
 import 'package:flutter/material.dart';
 
 
-class SimpleMyPage2 extends StatefulWidget {
+class SimplePage2 extends StatefulWidget {
   @override
-  _SimpleMyPage2State createState() => _SimpleMyPage2State();
+  _SimplePage2State createState() => _SimplePage2State();
 }
 
-class _SimpleMyPage2State extends State<SimpleMyPage2>
+class _SimplePage2State extends State<SimplePage2>
     with TickerProviderStateMixin {
   var page = 1;
 
@@ -23,6 +25,8 @@ class _SimpleMyPage2State extends State<SimpleMyPage2>
       ),
       body: AFutureWidget(
         childWidget: yourContentWidget(),
+        errorWidget: YourError1Widget(),
+        progressWidget: YourProgress2Widget(),
         fRefresh: SimpleDao.getData900(page: 1),
         onRefreshCallback: () {page = 1;modelList.clear();setState(() {});
         },

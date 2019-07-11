@@ -5,16 +5,14 @@ import 'package:flutter_allroundrefresh_example/net/dao/simple_dao.dart';
 import 'package:flutter/material.dart';
 
 
-class SimpleMyPage6 extends StatefulWidget {
+class SimplePage6 extends StatefulWidget {
   @override
-  _SimpleMyPage6State createState() => _SimpleMyPage6State();
+  _SimplePage6State createState() => _SimplePage6State();
 }
 
-class _SimpleMyPage6State extends State<SimpleMyPage6>
+class _SimplePage6State extends State<SimplePage6>
     with TickerProviderStateMixin {
   var page = 1;
-
-//  List<CourseListData> modelList = [];
   List<SimpleDataBean> modelList = [];
 
   @override
@@ -25,7 +23,6 @@ class _SimpleMyPage6State extends State<SimpleMyPage6>
       ),
       body: AFutureWidget(
         childWidget: yourContentWidget(),
-        errorWidget: YourError1Widget(),
         fRefresh: SimpleDao.getDataErr(page: 1),
         onRefreshCallback: () {
           page = 1;
@@ -37,7 +34,6 @@ class _SimpleMyPage6State extends State<SimpleMyPage6>
         },
         dataCallback: (List<dynamic> data) {
           data.forEach((v) {
-//            modelList.add(new CourseListData.fromJson(v));
             modelList.add(new SimpleDataBean.fromJson(v));
           });
           setState(() {});

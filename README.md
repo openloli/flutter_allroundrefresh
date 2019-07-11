@@ -1,18 +1,27 @@
+[TOCM]
+
+[TOC]
+
+
+
+
+
 文档语言：[中文简体](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README.md> )| [English](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> )
 
 # flutter_allroundrefresh
 
-### 集 初始转圈+网络正常/异常+数据正常/异常+重试+登录失效+下拉刷新+加载更多 的全能组件。
+**集 初始转圈+网络正常/异常+数据正常/异常+重试+登录失效+下拉刷新+加载更多 的全能组件。**
 
+## 快速使用
 
-## 添加依赖
+**添加依赖**
 
 ```flutter
 dependencies:
   flutter_allroundrefresh: ^2.0.0
 ```
 
-## 使用
+**使用**
 
 1、初始化方法、国际化配置（部分）、状态码配置
 
@@ -51,26 +60,26 @@ body: AFutureWidget(
 ...
 ```
 
-#### 说明
+**说明**
 
-##### AFutureWidget组件（高亮为必填）
+AFutureWidget组件
 
-| 字段                  | 默认值/返回类型 | 说明                                 |
-| --------------------- | --------------- | ------------------------------------ |
-| enablePullDown        | true            | 可不填                               |
-| ==childWidget==       | ScrollView类型  | 页面item                             |
-| errorWidget           | 初始错误页      | 可自定义，图片、gif均可              |
-| progressWidget        | 初始转圈        | 可自定义                             |
-| ==fRefresh==          | Future<dynamic> | 刷新方法，方法返回类型必须保持一致   |
-| fLoading              | Future<dynamic> | 加载更多方法，不填=无加载更多        |
-| onLoadingCallback     |                 | 加载更多回调，加载更多时必填         |
-| ==onRefreshCallback== |                 | 刷新方法                             |
-| tokenInvalidCallback  |                 | 登录失效处理回调，根据项目看是否需要 |
-| ==dataCallback==      |                 | 数据处理回调                         |
-| header                |                 | 刷新头                               |
-| footer                |                 | 加载更多                             |
+| 字段                 | 默认值/返回类型 | 是否必须 | 说明                                 |
+| -------------------- | --------------- | -------- | ------------------------------------ |
+| enablePullDown       | true            | 非       | 可不填                               |
+| childWidget          | ScrollView类型  | 必须     | 页面item                             |
+| errorWidget          | 初始错误页      | 非       | 可自定义，图片、gif均可              |
+| progressWidget       | 初始转圈        | 非       | 可自定义                             |
+| fRefresh             | Future<dynamic> | 必须     | 刷新方法，方法返回类型必须保持一致   |
+| fLoading             | Future<dynamic> | 非       | 加载更多方法，不填=无加载更多        |
+| onLoadingCallback    |                 | 非       | 加载更多回调，加载更多时必填         |
+| onRefreshCallback    |                 | 必须     | 刷新方法                             |
+| tokenInvalidCallback |                 | 非       | 登录失效处理回调，根据项目看是否需要 |
+| dataCallback         |                 | 必须     | 数据处理回调                         |
+| header               |                 | 非       | 刷新头                               |
+| footer               |                 | 非       | 加载更多                             |
 
-###### 重点说明：fRefresh 对应是的某个页面的网络获取方法，方法的返回类型为==Future<dynamic>==，同时，方法返回的数据格式必须是以下格式：
+**重点说明：`fRefresh`  对应是的某个页面的网络获取方法，方法的返回类型为 `Future<dynamic>`，同时，方法返回的数据格式必须是以下格式：**
 
 ```flutter
 {
@@ -82,7 +91,7 @@ body: AFutureWidget(
 
 
 
-##### AFutureWidget.init( );   初始化方法、国际化配置方法、状态码配置方法 
+**`AFutureWidget.init( ); `  初始化方法、国际化配置方法、状态码配置方法 **
 
 必须开启初始化方法
 
@@ -101,21 +110,31 @@ body: AFutureWidget(
 | netWifiLose      | 网络差或服务器超时，请稍后重试或使用4G尝试！ |
 | netLoseOrTimeOut | 网络差或服务器超时，请稍后重试!              |
 
-1、如果项目中没有国际化配置，则只需要条用一次AFutureWidget.init( ); 即可，
+1、如果项目中没有国际化配置，则只需要条用一次 `AFutureWidget.init( );` 即可，
 
-2、国际化则需要配置在AFutureWidget.init(loadingText:xxx... ); 进行配置（normalCode、tokenInvalidCode除外）
+2、国际化则需要配置在 `AFutureWidget.init(loadingText:xxx... );`  进行配置（`normalCode`、`tokenInvalidCode` 除外）
+
+## 截图
+
+## 说明文档
 
 
 
+## 其他
 
+**下载链接**
 
+[android apk](https://www.pgyer.com/X4Bi )
 
+**下载二维码**
 
-# 其他
+![](https://www.pgyer.com/app/qrcode/X4Bi)
 
-### QQ群：10788108。
+**联系方式**
 
-## 开源协议
+QQ群：10788108。
+
+**开源协议**
 
 ```
  
@@ -135,8 +154,11 @@ limitations under the License.
  
 ```
 
+**鸣谢**
 
+[pull_to_refresh](https://pub.flutter-io.cn/packages/pull_to_refresh )
 
-### 鸣谢
+[GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter )
 
-pull_to_refresh
+[领航未来](http://wzk.36ve.com/index.php/home/index )
+

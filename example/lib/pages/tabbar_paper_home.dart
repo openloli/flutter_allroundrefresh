@@ -70,9 +70,9 @@ class TabBarHomePageState extends State<TabBarHomePage>
             child: TabBarView(
               controller: _tabController,
               children: <Widget>[
-                new SimpleMyPage1(),
-                new SimpleMyPage2(),
-                new SimpleMyPage3(),
+                new SimplePage1(),
+                new SimplePage3(),
+                new SimplePage2(),
               ],
             ),
           ),
