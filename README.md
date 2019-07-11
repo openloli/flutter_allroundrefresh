@@ -1,10 +1,4 @@
-[TOCM]
-
 [TOC]
-
-
-
-
 
 文档语言：[中文简体](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README.md> )| [English](<https://github.com/android-pf/flutter_allroundrefresh/blob/master/README_EN.md> )
 
@@ -116,21 +110,21 @@ AFutureWidget组件
 
 ## 截图
 
-![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/loading_more.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/all.gif)
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/loading_more.gif)               ![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/all.gif)
 
-![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/bottomBar.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/def.gif)
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/bottomBar.gif)               ![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/def.gif)
 
-![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error1.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error2.gif)
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error1.gif)               ![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error2.gif)
 
-![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head1.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head2.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/no_data.gif)
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head1.gif)               ![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head2.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/no_data.gif)
 
-![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/relogin.gif)![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/tabbar.gif)
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/relogin.gif)               ![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/tabbar.gif)
 
 
 
-## 说明文档
+## DEMO使用说明
 
-1111
+[由于使用的是mocky模拟接口 我打包的正式包是无法获取数据的，也就是大家荡下来以后example跑起来也可能是没有数据的，具体跑起来点击这里](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/README.md)
 
 ## 其他
 
@@ -144,7 +138,7 @@ AFutureWidget组件
 
 **联系方式**
 
-QQ群：10788108。
+QQ群：`10788108`
 
 **开源协议**
 
