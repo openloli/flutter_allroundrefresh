@@ -40,6 +40,7 @@ class _SimplePage1State extends State<SimplePage1> with TickerProviderStateMixin
 
 
   Widget yourContentWidget() {
+
     return ListView.builder(
       itemCount: modelList.length,
       itemBuilder: (BuildContext context, int index) {

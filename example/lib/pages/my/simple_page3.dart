@@ -19,9 +19,7 @@ class _SimplePage3State extends State<SimplePage3>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AFutureWidget 组件DEMO'),
-      ),
+      appBar: AppBar(title: const Text('AFutureWidget 组件DEMO'),),
       body: AFutureWidget(
         enablePullDown: true,
         //下啦刷新开关，
@@ -30,17 +28,10 @@ class _SimplePage3State extends State<SimplePage3>
         progressWidget: YourProgress2Widget(),
         fRefresh: SimpleDao.getData10(page: 1),
         fLoading: SimpleDao.getData10(page: page),
-        onLoadingCallback: () {
-          page = page + 1;
-          setState(() {});
+        onLoadingCallback: () {page = page + 1;setState(() {});},
+        onRefreshCallback: () {page = 1;modelList.clear();setState(() {});
         },
-        onRefreshCallback: () {
-          page = 1;
-          modelList.clear();
-          setState(() {});
-        },
-        tokenInvalidCallback: () {
-          print('这里是 token失效的回调处理 通常为弹出对话框，点击确定,关闭前置页，打开登录页');
+        tokenInvalidCallback: () {print('这里是 token失效的回调处理 通常为弹出对话框，点击确定,关闭前置页，打开登录页');
         },
         dataCallback: (List<dynamic> data) {
           data.forEach((v) {
