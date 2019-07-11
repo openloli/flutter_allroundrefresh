@@ -116,6 +116,34 @@ AFutureWidget组件
 
 ## 截图
 
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/loading more.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/all.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/bottomBar.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/def.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error1.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/error2.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head1.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/head2.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/no data.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/relogin.gif)
+
+![](https://github.com/android-pf/flutter_allroundrefresh/blob/master/example/assets/screenShots/tabbar.gif)
+
+
+
+
+
+
+
 ## 说明文档
 
 
@@ -161,4 +189,10 @@ limitations under the License.
 [GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter )
 
 [领航未来](http://wzk.36ve.com/index.php/home/index )
+
+
+
+
+
+
 
