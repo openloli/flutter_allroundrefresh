@@ -80,19 +80,29 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
    ```
 
    >**In order to achieve a clear effect, it is not difficult to find the whole page code pasted on it**
-   >1.This page only needs to configure the specific component AFutureWidget under flutter_allroundrefresh
-   >2.The code of the ListView/GridView of the specific page, that is, the Item style is written.
+   >
+   >- This page only needs to configure the specific component AFutureWidget under flutter_allroundrefresh
+   >- The code of the ListView/GridView of the specific page, that is, the Item style is written
+   >  
 
    
 
    >**Precautions**
-   >1.The method of obtaining interface API data, that is, the parameter (method) of fRefresh, it should be noted here that whether it is a get/post/put/delete request, the return value of the specific method must be Future<dynamic>, refer to the demo for details.
-   >2.errorWidget: YourError1Widget(), / / support custom error page, demo / screenshot shows the default pure text, static map, and animation three effects
-   >3.progressWidget: YourProgress2Widget (), / / support custom initial circle, demo / screenshot shows the default circle, moving two effects
-   >4.tokenInvalidCallback: Login invalid callback method, according to the project to decide whether it is needed (the author's project is a pop-up dialog box, click OK to enter the login page)
-   >5.The json returned by the interface API is recommended to be formatted using  [json_to_dart](https://javiercbk.github.io/json_to_dart/) 
+   >
+   >- The method of obtaining interface API data, that is, the parameter (method) of fRefresh, it should be noted here that whether it is a get/post/put/delete request, the return value of the specific method must be Future<dynamic>, refer to the demo for details.
+   >
+   >- errorWidget: YourError1Widget(), / / support custom error page, demo / screenshot shows the default pure text, static map, and animation three effects
+   >
+   >- progressWidget: YourProgress2Widget (), / / support custom initial circle, demo / screenshot shows the default circle, moving two effects
+   >
+   >- tokenInvalidCallback: Login invalid callback method, according to the project to decide whether it is needed (the author's project is a pop-up dialog box, click OK to enter the login page)
+   >
+   >- The json returned by the interface API is recommended to be formatted using  [json_to_dart](https://javiercbk.github.io/json_to_dart/) 
+   >
+   >
+   >  
 
-5. ****
+5. The json format description returned by the interface API (if your background has its own code rules, you need to adapt it in the initialization method AFutureWidget.init();)
 
    ```
    {
@@ -103,10 +113,17 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
    ```
 
    >**Once you're done here, the benefits of accessing the flutter_allroundrefresh component are clear**
-   >1.Write / test the interface API data acquisition method (the author uses the dao concept in java, there is no use of bloc)
-   >2.Write an item for a specific page
-   >3.Then the overall project includes: the framework build + dao layer + UI layer, whether it is personal development, or team development, the project is very clear, the division of labor and workload are well allocated (non-list page is about to adapt, And return page refresh issues)
-   
+   >
+   >- Write / test the interface API data acquisition method (the author uses the dao concept in java, there is no use of bloc)
+   >
+   >- Write an item for a specific page
+   >
+   >- Then the overall project includes: the framework build + dao layer + UI layer, whether it is personal development, or team development, the project is very clear, the division of labor and workload are well allocated (non-list page is about to adapt, And return page refresh issues)
+   >
+   >  
+
+
+
 
 **Description**
 

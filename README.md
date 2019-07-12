@@ -80,19 +80,34 @@
    ```
 
    >**为了达到一目了然的效果，上面贴上了整个页面的代码，不难发现**
-   >1.该页面只需要配置flutter_allroundrefresh 下的具体组件AFutureWidget 即可
-   >2.具体页面的ListView/GridView 的代码，即Item样式编写
+   >
+   >- 该页面只需要配置flutter_allroundrefresh 下的具体组件AFutureWidget 即可
+   >
+   >- 具体页面的ListView/GridView 的代码，即Item样式编写
+   >
+   >  
+
+   
 
    
 
    >**注意事项**
-   >1.获取接口API数据的方法，即**fRefresh**的参数（方法），这里需要注意，无论是get/post/put/delete请求，具体**方法的返回值**必须是**Future<dynamic>**，详情参考demo
-   >2.errorWidget: YourError1Widget(),//支持**自定义错误页面**，demo/截图展示了默认纯文字、静态图、和动图三种效果
-   >3.progressWidget: YourProgress2Widget(),//支持**自定义初始转圈**，demo/截图展示了默认转圈、动图两种效果
-   >4.tokenInvalidCallback： **登录失效**的回调方法，根据项目决定是否需要（作者的项目是弹出对话框，点击确定进入登录页面）
-   >5.接口API返回的json建议使用 [json_to_dart](https://javiercbk.github.io/json_to_dart/) 进行格式化（有个小秘密在demo里。。。）
+   >
+   >- 获取接口API数据的方法，即**fRefresh**的参数（方法），这里需要注意，无论是get/post/put/delete请求，具体**方法的返回值**必须是**Future<dynamic>**，详情参考demo
+   >
+   >- errorWidget: YourError1Widget(),//支持**自定义错误页面**，demo/截图展示了默认纯文字、静态图、和动图三种效果
+   >
+   >- progressWidget: YourProgress2Widget(),//支持**自定义初始转圈**，demo/截图展示了默认转圈、动图两种效果
+   >
+   >- tokenInvalidCallback： **登录失效**的回调方法，根据项目决定是否需要（作者的项目是弹出对话框，点击确定进入登录页面）
+   >
+   >- 接口API返回的json建议使用 [json_to_dart](https://javiercbk.github.io/json_to_dart/) 进行格式化
+   >
+   >  
 
-5. The json format description returned by the interface API (if your background has its own code rules, you need to adapt it in the initialization method AFutureWidget.init();)
+   
+
+5. 接口API返回的**json格式**说明（**若你的后台有自己的code规则**则需要在初始化方法AFutureWidget.init();中进行适配）
 
 ```json
 {
@@ -105,9 +120,14 @@
 
 
 >**完成到这里，接入 flutter_allroundrefresh 组件的优势也就很清晰了**
->1.编写/测试接口API数据获取的方法（作者使用了java中的dao概念，木有使用bloc），
->2.编写具体页面的Item
->3.那么整体项目就包含：载框架搭建+dao层+UI层,不管是个人开发，还是团队开发，项目就很清晰了，分工与工作量就都很好分配了（非列表页面即将适配哈，以及返回页面刷新的问题）
+>
+>- 编写/测试接口API数据获取的方法（作者使用了java中的dao概念，木有使用bloc）
+>
+>- 编写具体页面的Item
+>
+>- 那么整体项目就包含：载框架搭建+dao层+UI层,不管是个人开发，还是团队开发，项目就很清晰了，分工与工作量就都很好分配了（非列表页面即将适配哈，以及返回页面刷新的问题）
+>
+>  
 
 
 
