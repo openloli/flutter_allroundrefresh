@@ -30,9 +30,6 @@ class AFutureWidget extends StatefulWidget {
   final Function onLoadingCallback; //加载更多回调，用于page+1
   final Function tokenInvalidCallback; //Token失效回调，用于处理对应事件
 
-//  final normalCode; //获取数据成功的code,默认200
-//  final tokenInvalidCode; //token失效的code,默认900
-
   final RefreshIndicator header;
   final LoadIndicator footer;
 
@@ -105,7 +102,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
   @override
   void initState() {
     _refreshController = new RefreshController(); //刷新框架
-//    AFutureWidget.initI18NAndCode();
     errorMsg = SpUtil.getString('errorMsg');
     normalCode = SpUtil.getString('normalCode');
     noDataCode = SpUtil.getString('noDataCode');
@@ -147,8 +143,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
       _refreshController.loadComplete();
       Future.delayed(const Duration(milliseconds: 1000)).then((val) {
         widget.fRefresh.then((result) {
-          print('result = ${result.runtimeType}');
-          print('result = ${result}');
           if (result != null) {
             first = false;
             error = false;
@@ -158,8 +152,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
             } else {
               _refreshController.refreshFailed();
               widget.onRefreshCallback();
-              print('bean.code ${bean.code}');
-              print('noDataCode ${noDataCode}');
               if (bean.code == normalCode) {
                 widget.dataCallback(bean.data);
               } else if (bean.code == noDataCode) {
