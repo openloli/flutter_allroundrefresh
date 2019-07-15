@@ -20,3 +20,7 @@
 - Major updates：Upgrade Components to Lazy Mode
 - Optimized the previous version of more redundant code, and some error-prone code to make components easier to use
 
+## 2.0.1
+
+- Fixed IOS refresh failure
+

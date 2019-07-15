@@ -150,7 +150,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
             if (bean.data == null || bean.data == '') {
               _refreshController.refreshFailed();
             } else {
-              _refreshController.refreshFailed();
+              _refreshController.refreshCompleted();
               widget.onRefreshCallback();
               if (bean.code == normalCode) {
                 widget.dataCallback(bean.data);
