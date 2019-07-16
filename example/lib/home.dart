@@ -97,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     '自定义:始化转圈2+错误页面2（点击重试）': new SimplePage8(),
     '底部页面情况（BottomNavigationBar）': new BottomBarHomePage(),
     '顶部页面情况（TabBarView）': new TabBarHomePage(),
+    '在本页面点击按钮触发接口替换数据的情况': new SimplePage7(),
 
 //    '待定1': new SimplePage4(),
 //    '待定2': new SimplePage5(),

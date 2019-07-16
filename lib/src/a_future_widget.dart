@@ -29,6 +29,7 @@ class AFutureWidget extends StatefulWidget {
   final Function onRefreshCallback; //刷新回调，用于清理数据，重置page
   final Function onLoadingCallback; //加载更多回调，用于page+1
   final Function tokenInvalidCallback; //Token失效回调，用于处理对应事件
+  final Function otherCallback;
 
   final RefreshIndicator header;
   final LoadIndicator footer;
@@ -46,6 +47,7 @@ class AFutureWidget extends StatefulWidget {
     this.onRefreshCallback,
     this.onLoadingCallback,
     this.tokenInvalidCallback,
+    this.otherCallback,
 
     this.header,
     this.footer,
@@ -97,7 +99,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
       first = true,
       error = false;
   RefreshController _refreshController;
-  var errorMsg, normalCode,noDataCode, tokenInvalidCode;
+  var errorMsg, normalCode, noDataCode, tokenInvalidCode;
 
   @override
   void initState() {
@@ -107,6 +109,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
     noDataCode = SpUtil.getString('noDataCode');
     tokenInvalidCode = SpUtil.getString('tokenInvalidCode');
     first = true;
+
     _onRefresh();
     super.initState();
   }
@@ -117,10 +120,12 @@ class AFutureWidgetState extends State<AFutureWidget> {
 
   @override
   Widget build(BuildContext context) {
+    helperSetting(context);
     return new Scaffold(
       body: content1(),
     );
   }
+
 
   Future<String> checkConnectivity() async {
     var connectivityResult = await(Connectivity().checkConnectivity());
@@ -270,5 +275,115 @@ class AFutureWidgetState extends State<AFutureWidget> {
       ],
     );
   }
+
+  /**
+   * 扩展方法，作者的实际项目项目中有这样一个要求，在页面内，可通过点击按钮触发接口
+   * （可以理解为切换uid进行数据访问）
+   * 在原组件中无法实现该功能，于是有了这个 helper类，若有更好的方案，希望能告知作者。
+   * The extension method, the author's actual project project has such a requirement,
+   * in the page, the interface can be triggered by clicking the button
+   * (can be understood as switching uid for data access)
+           This function cannot be implemented in the original component,
+      so I have this helper class. If there is a better solution, I hope to inform the author.
+   * */
+  void helperSetting(BuildContext context) {
+    var helper = AFutureWidgetHelper(
+      context: context,
+      fRefresh: widget.fRefresh,
+      refreshController: _refreshController,
+      first: first,
+      error: error,
+      onRefreshCallback: widget.onRefreshCallback,
+      dataCallback: widget.dataCallback,
+      tokenInvalidCallback: widget.tokenInvalidCallback,
+      normalCode: normalCode,
+      noDataCode: noDataCode,
+      tokenInvalidCode: tokenInvalidCode,
+      errorMsg: errorMsg,
+      setStateCallBack: () {
+        checkConnectivity().then((onValue) {
+          errorMsg = onValue;
+          setState(() {});
+        });
+      },
+      checkConnectivitycallBack: () {
+        setState(() {});
+      },
+    );
+
+    widget.otherCallback(helper);
+  }
 }
 
+class AFutureWidgetHelper {
+
+  var context, fRefresh, _refreshController, first, error, onRefreshCallback,
+      dataCallback, tokenInvalidCallback, normalCode, noDataCode, errorMsg,
+      tokenInvalidCode, setStateCallBack, checkConnectivitycallBack;
+
+  AFutureWidgetHelper({
+    context, fRefresh, refreshController, first, error,
+    onRefreshCallback, dataCallback, tokenInvalidCallback, normalCode,
+    noDataCode, tokenInvalidCode, errorMsg, Function setStateCallBack, Function checkConnectivitycallBack,
+  }) {
+    this.context = context;
+    this.fRefresh = fRefresh;
+    this._refreshController = refreshController;
+    this.first = first;
+    this.error = error;
+    this.onRefreshCallback = onRefreshCallback;
+    this.dataCallback = dataCallback;
+    this.tokenInvalidCallback = tokenInvalidCallback;
+    this.normalCode = normalCode;
+    this.noDataCode = noDataCode;
+    this.tokenInvalidCode = tokenInvalidCode;
+    this.errorMsg = errorMsg;
+    this.setStateCallBack = setStateCallBack;
+    this.checkConnectivitycallBack = checkConnectivitycallBack;
+  }
+
+  void manualRefresh(Future<dynamic> FutureResult) {
+    if (FutureResult != null) {
+      FutureResult.then((result) {
+        _refreshController.loadComplete();
+        if (result != null) {
+          first = false;
+          error = false;
+          CommBean bean = CommBean.fromJson(result);
+          if (bean.data == null || bean.data == '') {
+            _refreshController.refreshFailed();
+          } else {
+            _refreshController.refreshCompleted();
+            onRefreshCallback();
+            if (bean.code == normalCode) {
+              dataCallback(bean.data);
+            } else if (bean.code == noDataCode) {
+              errorMsg = bean.msg;
+              error = true;
+            } else if (bean.code == tokenInvalidCode) {
+              callDialog(
+                  title: bean.msg,
+                  context: context,
+                  cancel: false,
+                  callback: () {
+                    Navigator.of(context).pop();
+                    tokenInvalidCallback();
+                  }
+              );
+            } else {
+              errorMsg = bean.msg;
+              error = true;
+            }
+          }
+        } else {
+          first = false;
+          error = true;
+          onRefreshCallback();
+          _refreshController.refreshFailed();
+          checkConnectivitycallBack();
+        }
+        setStateCallBack();
+      });
+    }
+  }
+}

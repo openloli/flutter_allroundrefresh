@@ -6,6 +6,7 @@
 
 library pulltorefresh;
 
+export 'src/bean/comm_bean.dart';
 export 'src/a_future_widget.dart';
 export 'src/indicator/classic_indicator.dart';
 export 'src/indicator/waterdrop_header.dart';

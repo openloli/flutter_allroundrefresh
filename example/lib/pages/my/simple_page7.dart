@@ -23,31 +23,82 @@ class _SimplePage7State extends State<SimplePage7>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AFutureWidget 组件DEMO'),
-      ),
-      body: AFutureWidget(
-        childWidget: yourContentWidget(),
-        errorWidget: YourError1Widget(),
-        progressWidget: YourProgress1Widget(),
-        fRefresh: SimpleDao.getDataErr(page: 1),
+        appBar: AppBar(
+          title: const Text('AFutureWidget 组件DEMO'),
+        ),
+        body: Column(
+          children: <Widget>[
 
-        onRefreshCallback: () {
-          page = 1;
-          modelList.clear();
-          setState(() {});
-        },
-        tokenInvalidCallback: () {
-          print('这里是 token失效的回调处理 通常为弹出对话框，点击确定,关闭前置页，打开登录页');
-        },
-        dataCallback: (List<dynamic> data) {
-          data.forEach((v) {
-            modelList.add(new SimpleDataBean.fromJson(v));
-          });
-          setState(() {});
-        },
-      ),
+            GestureDetector(
+              onTap: () {
+                _surprise(false);
+              },
+              child: Container(
+                height: 50.0,
+                margin: EdgeInsets.fromLTRB(24.0, 0.0, 24.0, 0.0,),
+                decoration: BoxDecoration(
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
+                  border: new Border.all(width: 0.5, color: Colors.black45),
+                  borderRadius: new BorderRadius.all(new Radius.circular(35.0)),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40.0,
+                  //登录
+                  child: Text('点击获取数据'),),
+              ),
+            ),
+            Expanded(
+              child: AFutureWidget(
+                childWidget: yourContentWidget(),
+                errorWidget: YourError1Widget(),
+                progressWidget: YourProgress1Widget(),
+
+                fRefresh: _surprise(true),
+                onRefreshCallback: () {
+                  page = 1;
+                  modelList.clear();
+                  setState(() {});
+                },
+                tokenInvalidCallback: () {
+                  print('这里是 token失效的回调处理 通常为弹出对话框，点击确定,关闭前置页，打开登录页');
+                },
+                dataCallback: (List<dynamic> data) {
+                  data.forEach((v) {
+                    modelList.add(new SimpleDataBean.fromJson(v));
+                  });
+                  setState(() {});
+                },
+                otherCallback: (helper) {
+                  this.helper = helper;
+                },
+              ),
+            ),
+          ],
+        )
     );
+  }
+
+  AFutureWidgetHelper helper;
+
+
+  _surprise(up) async {
+    print('执行了_surprise1 ');
+    Future<dynamic> data10 = null;
+
+    if (!up) {
+      data10 = SimpleDao.getData4(page: 1);
+      if (helper != null) {
+        helper.manualRefresh(data10);
+      } else {
+        print('执行了_surprise1  helper=null ');
+      }
+    } else {
+      data10 = SimpleDao.getData10(page: 1);
+    }
+    return data10;
   }
 
 
