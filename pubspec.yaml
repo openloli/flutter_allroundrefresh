@@ -1,6 +1,6 @@
 name: flutter_allroundrefresh
 description: Set Initial lap + network normal / abnormal + data normal / abnormal + retry + login invalid + pull-down refresh + load more versatile components.
-version: 2.0.0
+version: 2.0.1
 author: pf <133300871@qq.com>
 homepage: https://github.com/android-pf/flutter_allroundrefresh
 
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   ######
-  connectivity: ^0.4.3+2
+  connectivity: ^0.4.3+4
   shared_preferences: ^0.5.3+2
   ######
 dev_dependencies:
