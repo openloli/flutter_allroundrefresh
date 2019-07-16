@@ -287,31 +287,33 @@ class AFutureWidgetState extends State<AFutureWidget> {
       so I have this helper class. If there is a better solution, I hope to inform the author.
    * */
   void helperSetting(BuildContext context) {
-    var helper = AFutureWidgetHelper(
-      context: context,
-      fRefresh: widget.fRefresh,
-      refreshController: _refreshController,
-      first: first,
-      error: error,
-      onRefreshCallback: widget.onRefreshCallback,
-      dataCallback: widget.dataCallback,
-      tokenInvalidCallback: widget.tokenInvalidCallback,
-      normalCode: normalCode,
-      noDataCode: noDataCode,
-      tokenInvalidCode: tokenInvalidCode,
-      errorMsg: errorMsg,
-      setStateCallBack: () {
-        checkConnectivity().then((onValue) {
-          errorMsg = onValue;
+    if(widget.otherCallback!=null){
+      var helper = AFutureWidgetHelper(
+        context: context,
+        fRefresh: widget.fRefresh,
+        refreshController: _refreshController,
+        first: first,
+        error: error,
+        onRefreshCallback: widget.onRefreshCallback,
+        dataCallback: widget.dataCallback,
+        tokenInvalidCallback: widget.tokenInvalidCallback,
+        normalCode: normalCode,
+        noDataCode: noDataCode,
+        tokenInvalidCode: tokenInvalidCode,
+        errorMsg: errorMsg,
+        setStateCallBack: () {
+          checkConnectivity().then((onValue) {
+            errorMsg = onValue;
+            setState(() {});
+          });
+        },
+        checkConnectivitycallBack: () {
           setState(() {});
-        });
-      },
-      checkConnectivitycallBack: () {
-        setState(() {});
-      },
-    );
+        },
+      );
 
-    widget.otherCallback(helper);
+      widget.otherCallback(helper);
+    }
   }
 }
 
