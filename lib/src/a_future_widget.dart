@@ -279,7 +279,8 @@ class AFutureWidgetState extends State<AFutureWidget> {
   /**
    * 扩展方法，作者的实际项目项目中有这样一个要求，在页面内，可通过点击按钮触发接口
    * （可以理解为切换uid进行数据访问）
-   * 在原组件中无法实现该功能，于是有了这个 helper类，若有更好的方案，希望能告知作者。
+   * 在原组件中无法实现该功能，于是有了这个 helper 类，若有更好的方案，希望能告知作者。
+   *
    * The extension method, the author's actual project project has such a requirement,
    * in the page, the interface can be triggered by clicking the button
    * (can be understood as switching uid for data access)

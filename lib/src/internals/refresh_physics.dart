@@ -7,10 +7,7 @@ import '../../future_refresh.dart';
 
 
 /*
- only support three parent physics:
- 1. AlwaysScroll
- 2.Clamping
- 3.Bouncing 
+    Author: pf
  */
 class RefreshPhysics extends ScrollPhysics {
   final double maxOverScrollExtent, maxUnderScrollExtent;

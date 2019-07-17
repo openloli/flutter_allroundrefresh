@@ -3,6 +3,7 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 # flutter_allroundrefresh
 
 **Set Initial lap + network normal / abnormal + pull-down refresh + load more + data normal / abnormal + retry + login failed component.**
+
 ### Quick use
 
 1. **Adding dependencies**

@@ -24,3 +24,7 @@
 
 - Fixed IOS refresh failure
 
+## 2.0.2
+
+- New scalable solutions to support some unknown needs
+

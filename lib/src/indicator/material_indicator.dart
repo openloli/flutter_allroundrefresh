@@ -4,8 +4,11 @@ import 'package:flutter/widgets.dart';
 import '../internals/indicator_wrap.dart';
 import '../smart_refresher.dart';
 
-// How much the scroll's drag gesture can overshoot the RefreshIndicator's
-// displacement; max displacement = _kDragSizeFactorLimit * displacement.
+/*
+How much the scroll's drag gesture can overshoot the RefreshIndicator's
+displacement; max displacement = _kDragSizeFactorLimit * displacement.
+ */
+
 const double _kDragSizeFactorLimit = 1.5;
 
 class MaterialClassicHeader extends RefreshIndicator {
