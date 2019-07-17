@@ -2,15 +2,14 @@ Language ：[中文简体](<https://github.com/android-pf/flutter_allroundrefres
 
 # flutter_allroundrefresh
 
-**Set Initial lap + network normal / abnormal + data normal / abnormal + retry + login invalid + pull-down refresh + load more versatile components.**
-
+**Set Initial lap + network normal / abnormal + pull-down refresh + load more + data normal / abnormal + retry + login failed component.**
 ### Quick use
 
 1. **Adding dependencies**
 
    ```dart
    dependencies:
-     flutter_allroundrefresh: ^2.0.0
+     flutter_allroundrefresh: ^2.0.2
    ```
 
 2. **Import**

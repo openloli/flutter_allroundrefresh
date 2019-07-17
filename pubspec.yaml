@@ -1,6 +1,6 @@
 name: flutter_allroundrefresh
-description: Set Initial lap + network normal / abnormal + data normal / abnormal + retry + login invalid + pull-down refresh + load more versatile components.
-version: 2.0.1
+description: plugin provided pull-up refresh pull-down and handle normal data and data anomalies
+version: 2.0.2
 author: pf <133300871@qq.com>
 homepage: https://github.com/android-pf/flutter_allroundrefresh
 

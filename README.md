@@ -2,7 +2,7 @@
 
 # flutter_allroundrefresh
 
-**集 初始转圈+网络正常/异常+数据正常/异常+重试+登录失效+下拉刷新+加载更多 的全能组件。**
+**集 初始转圈+网络正常/异常+下拉刷新+加载更多+数据正常/异常+重试+登录失效 的组件。**
 
 ## 快速使用
 
@@ -10,7 +10,7 @@
 
    ```dart
    dependencies:
-     flutter_allroundrefresh: ^2.0.0
+     flutter_allroundrefresh: ^2.0.2
    ```
 
 2. 引用
