@@ -2,7 +2,7 @@
     Author: pf
  */
 
-library pulltorefresh;
+library allroundrefresh;
 
 export 'src/bean/comm_bean.dart';
 export 'src/a_future_widget.dart';
