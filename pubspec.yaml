@@ -1,30 +1,25 @@
 name: flutter_allroundrefresh
 description: plugin provided pull-up refresh pull-down and handle normal data and data anomalies
-version: 2.0.2
+version: 2.0.3
 author: pf <133300871@qq.com>
 homepage: https://github.com/android-pf/flutter_allroundrefresh
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
-  flutter: ">=0.1.4 <2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   ######
-  connectivity: ^0.4.3+5
+  connectivity: ^0.4.4
   shared_preferences: ^0.5.3+4
+  pull_to_refresh: ^1.5.6
   ######
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  ######
 flutter:
-  ######
   plugin:
     androidPackage: com.futurenavi.flutter_allroundrefresh
     pluginClass: FlutterAllroundrefreshPlugin
-
-#flutter packages pub publish --dry-run
-#flutter packages pub publish --server=https://pub.dartlang.org

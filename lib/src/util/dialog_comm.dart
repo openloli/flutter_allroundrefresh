@@ -14,24 +14,26 @@ callDialog({context, title, cancel = true, Function callback}) async {
           ),
         ),
         actions: <Widget>[
-          cancel ? FlatButton(
-            child: new Text('取消'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ) : Container(height: 0.0,),
-
+          cancel
+              ? FlatButton(
+                  child: new Text('取消'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              : Container(
+                  height: 0.0,
+                ),
           FlatButton(
             child: new Text('确定'),
             onPressed: () {
               callback();
             },
           ),
-
         ],
       );
     },
   ).then((val) {
-    print('弹出框 $val');
+    print('11111弹出框 $val');
   });
 }

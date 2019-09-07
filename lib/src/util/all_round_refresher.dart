@@ -17,7 +17,6 @@
 //enum RefreshStyle { Follow, UnFollow, Behind }
 //enum ResultStatus { init, nomel, error, noMore, retry }
 //
-///*
 //    This is the most important component that provides full functionality.
 // */
 //class AllRoundRefresher extends StatefulWidget {

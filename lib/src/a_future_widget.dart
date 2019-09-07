@@ -2,7 +2,6 @@ import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
 import 'package:flutter_allroundrefresh/src/proview/proqress_view.dart';
 import 'package:flutter_allroundrefresh/src/util/dialog_comm.dart';
-import 'package:flutter_allroundrefresh/src/smart_refresher.dart';
 import 'package:flutter_allroundrefresh/src/bean/comm_bean.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
@@ -10,12 +9,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_allroundrefresh/src/util/sp_util.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../future_refresh.dart';
 import 'dart:async';
 
 
 class AFutureWidget extends StatefulWidget {
-
   final bool enablePullDown; //是否开启下拉刷新
 
   final Widget errorWidget; //404布局头
@@ -34,7 +33,6 @@ class AFutureWidget extends StatefulWidget {
   final RefreshIndicator header;
   final LoadIndicator footer;
 
-
   AFutureWidget({
     Key key,
     this.enablePullDown = true,
@@ -48,16 +46,12 @@ class AFutureWidget extends StatefulWidget {
     this.onLoadingCallback,
     this.tokenInvalidCallback,
     this.otherCallback,
-
     this.header,
     this.footer,
-  })
-      : super(key: key);
-
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => AFutureWidgetState();
-
 
   static void init({
     loadingText: '加载中...',
@@ -71,7 +65,6 @@ class AFutureWidget extends StatefulWidget {
     netClose: '检测到手机没有网络，请打开网络后重试！',
     netWifiLose: '网络差或服务器超时，请稍后重试或使用4G尝试！',
     netLoseOrTimeOut: '网络差或服务器超时，请稍后重试!',
-
   }) async {
     await SpUtil.getInstance();
     SpUtil.putString('loadingText', loadingText);
@@ -88,16 +81,13 @@ class AFutureWidget extends StatefulWidget {
   }
 
   static AFutureWidgetState of(BuildContext context) {
-    return context?.ancestorStateOfType(
-        const TypeMatcher<AFutureWidgetState>());
+    return context
+        ?.ancestorStateOfType(const TypeMatcher<AFutureWidgetState>());
   }
 }
 
 class AFutureWidgetState extends State<AFutureWidget> {
-
-  bool refresh = false,
-      first = true,
-      error = false;
+  bool refresh = false, first = true, error = false;
   RefreshController _refreshController;
   var errorMsg, normalCode, noDataCode, tokenInvalidCode;
 
@@ -115,7 +105,8 @@ class AFutureWidgetState extends State<AFutureWidget> {
   }
 
   void _onOffsetCallback(bool isUp, double offset) {
-    if (isUp) {} else {}
+    if (isUp) {
+    } else {}
   }
 
   @override
@@ -126,14 +117,13 @@ class AFutureWidgetState extends State<AFutureWidget> {
     );
   }
 
-
   Future<String> checkConnectivity() async {
-    var connectivityResult = await(Connectivity().checkConnectivity());
+    var connectivityResult = await (Connectivity().checkConnectivity());
     return connectivityResult == ConnectivityResult.none
         ? SpUtil.getString('netClose')
         : (connectivityResult == ConnectivityResult.wifi
-        ? SpUtil.getString('netWifiLose')
-        : SpUtil.getString('netLoseOrTimeOut'));
+            ? SpUtil.getString('netWifiLose')
+            : SpUtil.getString('netLoseOrTimeOut'));
   }
 
   @override
@@ -141,7 +131,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
     _refreshController.dispose();
     super.dispose();
   }
-
 
   void _onRefresh() {
     if (widget.fRefresh != null) {
@@ -170,8 +159,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
                     callback: () {
                       Navigator.of(context).pop();
                       widget.tokenInvalidCallback();
-                    }
-                );
+                    });
               } else {
                 errorMsg = bean.msg;
                 error = true;
@@ -192,7 +180,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
       });
     }
   }
-
 
   void _onLoading() {
     if (widget.fLoading != null) {
@@ -218,7 +205,6 @@ class AFutureWidgetState extends State<AFutureWidget> {
       });
     }
   }
-
 
   Widget content1() {
     return Stack(
@@ -247,8 +233,9 @@ class AFutureWidgetState extends State<AFutureWidget> {
           child: new Container(
             alignment: Alignment.center,
             color: Colors.white70,
-            child: widget.progressWidget == null ? ProgressView() : widget
-                .progressWidget,
+            child: widget.progressWidget == null
+                ? ProgressView()
+                : widget.progressWidget,
           ),
         ),
         //错误页面
@@ -263,12 +250,14 @@ class AFutureWidgetState extends State<AFutureWidget> {
                   _refreshController.requestRefresh();
                 });
               },
-              child: widget.errorWidget == null ? Text(errorMsg) :
-              Column(children: <Widget>[
-                widget.errorWidget,
-                Text(errorMsg),
-              ],)
-              ,
+              child: widget.errorWidget == null
+                  ? Text(errorMsg)
+                  : Column(
+                      children: <Widget>[
+                        widget.errorWidget,
+                        Text(errorMsg),
+                      ],
+                    ),
             ),
           ),
         )
@@ -276,7 +265,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
     );
   }
 
-  /**
+  /*
    * 扩展方法，作者的实际项目项目中有这样一个要求，在页面内，可通过点击按钮触发接口
    * （可以理解为切换uid进行数据访问）
    * 在原组件中无法实现该功能，于是有了这个 helper 类，若有更好的方案，希望能告知作者。
@@ -288,7 +277,7 @@ class AFutureWidgetState extends State<AFutureWidget> {
       so I have this helper class. If there is a better solution, I hope to inform the author.
    * */
   void helperSetting(BuildContext context) {
-    if(widget.otherCallback!=null){
+    if (widget.otherCallback != null) {
       var helper = AFutureWidgetHelper(
         context: context,
         fRefresh: widget.fRefresh,
@@ -319,15 +308,36 @@ class AFutureWidgetState extends State<AFutureWidget> {
 }
 
 class AFutureWidgetHelper {
-
-  var context, fRefresh, _refreshController, first, error, onRefreshCallback,
-      dataCallback, tokenInvalidCallback, normalCode, noDataCode, errorMsg,
-      tokenInvalidCode, setStateCallBack, checkConnectivitycallBack;
+  var context,
+      fRefresh,
+      _refreshController,
+      first,
+      error,
+      onRefreshCallback,
+      dataCallback,
+      tokenInvalidCallback,
+      normalCode,
+      noDataCode,
+      errorMsg,
+      tokenInvalidCode,
+      setStateCallBack,
+      checkConnectivitycallBack;
 
   AFutureWidgetHelper({
-    context, fRefresh, refreshController, first, error,
-    onRefreshCallback, dataCallback, tokenInvalidCallback, normalCode,
-    noDataCode, tokenInvalidCode, errorMsg, Function setStateCallBack, Function checkConnectivitycallBack,
+    context,
+    fRefresh,
+    refreshController,
+    first,
+    error,
+    onRefreshCallback,
+    dataCallback,
+    tokenInvalidCallback,
+    normalCode,
+    noDataCode,
+    tokenInvalidCode,
+    errorMsg,
+    Function setStateCallBack,
+    Function checkConnectivitycallBack,
   }) {
     this.context = context;
     this.fRefresh = fRefresh;
@@ -345,9 +355,10 @@ class AFutureWidgetHelper {
     this.checkConnectivitycallBack = checkConnectivitycallBack;
   }
 
-  void manualRefresh(Future<dynamic> FutureResult) {
-    if (FutureResult != null) {
-      FutureResult.then((result) {
+  void manualRefresh(Future<dynamic> futureResult) {
+    if (futureResult != null) {
+      futureResult.then((result) {
+//        print('result${result}');
         _refreshController.loadComplete();
         if (result != null) {
           first = false;
@@ -358,7 +369,9 @@ class AFutureWidgetHelper {
           } else {
             _refreshController.refreshCompleted();
             onRefreshCallback();
+            print('bean.code${bean.code}');
             if (bean.code == normalCode) {
+              print('bean.code${bean.data}');
               dataCallback(bean.data);
             } else if (bean.code == noDataCode) {
               errorMsg = bean.msg;
@@ -371,8 +384,7 @@ class AFutureWidgetHelper {
                   callback: () {
                     Navigator.of(context).pop();
                     tokenInvalidCallback();
-                  }
-              );
+                  });
             } else {
               errorMsg = bean.msg;
               error = true;

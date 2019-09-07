@@ -1,4 +1,4 @@
-class CommBean{
+class CommBean {
   String msg;
   String ver;
   Object data;
@@ -25,4 +25,3 @@ class CommBean{
     return data;
   }
 }
-

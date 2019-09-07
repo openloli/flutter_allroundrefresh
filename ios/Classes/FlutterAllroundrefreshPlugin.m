@@ -1,20 +1,8 @@
 #import "FlutterAllroundrefreshPlugin.h"
+#import <flutter_allroundrefresh/flutter_allroundrefresh-Swift.h>
 
 @implementation FlutterAllroundrefreshPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"flutter_allroundrefresh"
-            binaryMessenger:[registrar messenger]];
-  FlutterAllroundrefreshPlugin* instance = [[FlutterAllroundrefreshPlugin alloc] init];
-  [registrar addMethodCallDelegate:instance channel:channel];
+  [SwiftFlutterAllroundrefreshPlugin registerWithRegistrar:registrar];
 }
-
-- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else {
-    result(FlutterMethodNotImplemented);
-  }
-}
-
 @end

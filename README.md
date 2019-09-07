@@ -10,7 +10,7 @@
 
    ```dart
    dependencies:
-     flutter_allroundrefresh: ^2.0.2
+     flutter_allroundrefresh: ^2.0.3
    ```
 
 2. 引用
