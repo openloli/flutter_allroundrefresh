@@ -1,0 +1,84 @@
+{
+    "msg": "登录已失效请重新登录",
+    "ver": "1.5.0",
+    "data": [],
+    "success": true,
+    "code": "900"
+}
+
+{
+    "msg": "暂无数据",
+    "ver": "1.5.0",
+    "data": [],
+    "success": true,
+    "code": "404"
+}
+
+{
+    "msg": "查找成功",
+    "ver": "1.5.0",
+    "data": [
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/8262cd9fbbd64b1388a9bcaf94321191.jpeg",
+            "id": "1",
+            "name": "人类简史",
+            "pet_name": "尤瓦尔·赫拉利"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/3c002927b8794c5d823d9a76773d279b.jpeg",
+            "id": "2",
+            "name": "自控力",
+            "pet_name": "凯利·麦格尼格尔"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/27b73a375fb6477590df107ce3b141eb.jpeg",
+            "id": "3",
+            "name": "原则",
+            "pet_name": "瑞·达利欧"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/7bab81eeacd04e4cb7d29b5db54417fe.jpeg",
+            "id": "4",
+            "name": "苏东坡传",
+            "pet_name": "林语堂"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/044f21266cb2432a9b230d2ab5121231.jpeg",
+            "id": "5",
+            "name": "你一定爱读的极简欧洲史",
+            "pet_name": "约翰·赫斯特"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/98fc527c1ef94f598597b3985153061a.jpeg",
+            "id": "6",
+            "name": "哈佛中国史",
+            "pet_name": "卜正民"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/d678c62dcfb24a03816f5c1ffb949f88.jpeg",
+            "id": "7",
+            "name": "基因传",
+            "pet_name": "悉达多·穆克吉"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/bd8c1f459ce742908d0d149a478c5a19.jpeg",
+            "id": "8",
+            "name": "“错误”的行为",
+            "pet_name": "理查德·泰勒"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/001aae303a10439886f2f398fc4913f3.jpeg",
+            "id": "9",
+            "name": "心流",
+            "pet_name": "米哈里·契克森米哈赖"
+        },
+        {
+            "image_url": "http://5b0988e595225.cdn.sohucs.com/images/20180630/81b1402363544bf4adc1e831eae3b0c3.jpeg",
+            "id": "10",
+            "name": "思考，快与慢",
+            "pet_name": "丹尼尔·卡尼曼"
+        }
+    ],
+    "success": true,
+    "code": "200"
+}

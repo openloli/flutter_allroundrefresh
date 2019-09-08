@@ -11,7 +11,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_allroundrefresh/src/util/sp_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../future_refresh.dart';
-import 'dart:async';
 
 
 class AFutureWidget extends StatefulWidget {
